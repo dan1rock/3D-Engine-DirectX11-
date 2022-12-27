@@ -14,7 +14,7 @@ void AppWindow::onCreate()
 	mSwapChain = GraphicsEngine::get()->createSwapShain();
 
 	RECT windowSize = this->getClientWindowRect();
-	mSwapChain->init(this->mHwnd, windowSize.left - windowSize.right, windowSize.bottom - windowSize.top);
+	mSwapChain->init(this->mHwnd, windowSize.right - windowSize.left, windowSize.bottom - windowSize.top);
 }
 
 void AppWindow::onUpdate()

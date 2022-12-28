@@ -40,7 +40,7 @@ bool SwapChain::init(HWND hwnd, UINT width, UINT height)
 	}
 
 	ID3D11Texture2D* buffer;
-	hr = mSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)buffer);
+	hr = mSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&buffer);
 	if (FAILED(hr))
 		return false;
 

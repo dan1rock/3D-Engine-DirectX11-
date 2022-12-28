@@ -19,7 +19,7 @@ bool GraphicsEngine::init()
 		D3D_FEATURE_LEVEL_11_0
 	};
 
-	ID3D11DeviceContext* mImmContext;
+	ID3D11DeviceContext* mImmContext = NULL;
 	
 	HRESULT create = 0;
 	for (UINT index = 0; index < ARRAYSIZE(driverTypes);) {

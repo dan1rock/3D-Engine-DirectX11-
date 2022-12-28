@@ -32,13 +32,29 @@ bool SwapChain::init(HWND hwnd, UINT width, UINT height)
 	desc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 	
 
-	HRESULT create = GraphicsEngine::get()->mDxgiFactory->CreateSwapChain(device, &desc, &mSwapChain);
-	if (FAILED(create)) {
-		std::string message = std::system_category().message(create);
+	HRESULT hr = GraphicsEngine::get()->mDxgiFactory->CreateSwapChain(device, &desc, &mSwapChain);
+	if (FAILED(hr)) {
+		std::string message = std::system_category().message(hr);
 		cout << message;
 		return false;
 	}
 
+	ID3D11Texture2D* buffer;
+	hr = mSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)buffer);
+	if (FAILED(hr))
+		return false;
+
+	hr = device->CreateRenderTargetView(buffer, NULL, &mRenderTargetView);
+	buffer->Release();
+	if (FAILED(hr))
+		return false;
+
+	return true;
+}
+
+bool SwapChain::present(bool vSync)
+{
+	mSwapChain->Present(vSync, NULL);
 	return true;
 }
 

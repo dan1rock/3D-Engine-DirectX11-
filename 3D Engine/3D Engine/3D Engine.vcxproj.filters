@@ -24,6 +24,9 @@
     <ClCompile Include="SwapChain.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="DeviceContext.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -36,6 +39,9 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="SwapChain.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceContext.h">
       <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>

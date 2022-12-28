@@ -19,7 +19,8 @@ void AppWindow::onCreate()
 
 void AppWindow::onUpdate()
 {
-	
+	GraphicsEngine::get()->getImmDeviceContext()->clearRenderTarget(mSwapChain, 1, 0, 0, 1);
+	mSwapChain->present(false);
 }
 
 void AppWindow::onDestroy()

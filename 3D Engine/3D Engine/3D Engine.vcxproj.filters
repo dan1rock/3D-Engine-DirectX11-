@@ -27,6 +27,9 @@
     <ClCompile Include="DeviceContext.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="VertexBuffer.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -42,6 +45,9 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="DeviceContext.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexBuffer.h">
       <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>

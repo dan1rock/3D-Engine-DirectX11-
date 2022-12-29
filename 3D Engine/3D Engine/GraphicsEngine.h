@@ -3,6 +3,7 @@
 
 class SwapChain;
 class DeviceContext;
+class VertexBuffer;
 
 class GraphicsEngine
 {
@@ -26,5 +27,6 @@ private:
 	IDXGIFactory* mDxgiFactory;
 
 	friend class SwapChain;
+	friend class VertexBuffer;
 };
 

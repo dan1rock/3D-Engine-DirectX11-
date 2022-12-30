@@ -32,8 +32,12 @@ void AppWindow::onCreate()
 
 	mVertexBuffer = GraphicsEngine::get()->createVertexBuffer();
 
+	GraphicsEngine::get()->createShaders();
+
 	void* shaderByteCode = nullptr;
 	UINT shaderSize = 0;
+
+	GraphicsEngine::get()->getShaderBufferAndSize(&shaderByteCode, &shaderSize);
 
 	mVertexBuffer->load(vertexList, sizeof(vertex), ARRAYSIZE(vertexList), shaderByteCode, shaderSize);
 }
@@ -43,6 +47,7 @@ void AppWindow::onUpdate()
 	GraphicsEngine::get()->getImmDeviceContext()->clearRenderTarget(mSwapChain, 0, 0.3f, 0.4f, 1);
 	RECT windowSize = this->getClientWindowRect();
 	GraphicsEngine::get()->getImmDeviceContext()->setViewportSize(windowSize.right - windowSize.left, windowSize.bottom - windowSize.top);
+	GraphicsEngine::get()->setShaders();
 	GraphicsEngine::get()->getImmDeviceContext()->setVertexBuffer(mVertexBuffer);
 	GraphicsEngine::get()->getImmDeviceContext()->drawTriangleList(mVertexBuffer->getVertexListSize(), 0);
 	mSwapChain->present(false);

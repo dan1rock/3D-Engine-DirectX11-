@@ -18,6 +18,9 @@ public:
 	SwapChain* createSwapShain();
 	DeviceContext* getImmDeviceContext();
 	VertexBuffer* createVertexBuffer();
+	bool createShaders();
+	bool setShaders();
+	void getShaderBufferAndSize(void** bytecode, UINT* size);
 private:
 	ID3D11Device* mD3dDevice;
 	D3D_FEATURE_LEVEL mFeatureLevel;
@@ -26,6 +29,12 @@ private:
 	IDXGIDevice* mDxgiDevice;
 	IDXGIAdapter* mDxgiAdapter;
 	IDXGIFactory* mDxgiFactory;
+
+	ID3DBlob* mVSBlob;
+	ID3DBlob* mPSBlob;
+
+	ID3D11VertexShader* mVS;
+	ID3D11PixelShader* mPS;
 
 	friend class SwapChain;
 	friend class VertexBuffer;

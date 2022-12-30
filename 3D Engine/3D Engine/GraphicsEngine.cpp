@@ -2,6 +2,7 @@
 #include "SwapChain.h"
 #include "DeviceContext.h"
 #include "VertexBuffer.h"
+#include <d3dcompiler.h>
 
 
 GraphicsEngine::GraphicsEngine()
@@ -76,4 +77,29 @@ DeviceContext* GraphicsEngine::getImmDeviceContext()
 VertexBuffer* GraphicsEngine::createVertexBuffer()
 {
 	return new VertexBuffer();
+}
+
+bool GraphicsEngine::createShaders()
+
+{
+	ID3DBlob* errblob = nullptr;
+	D3DCompileFromFile(L"shader.fx", nullptr, nullptr, "vsmain", "vs_5_0", NULL, NULL, &mVSBlob, &errblob);
+	D3DCompileFromFile(L"shader.fx", nullptr, nullptr, "psmain", "ps_5_0", NULL, NULL, &mPSBlob, &errblob);
+	mD3dDevice->CreateVertexShader(mVSBlob->GetBufferPointer(), mVSBlob->GetBufferSize(), nullptr, &mVS);
+	mD3dDevice->CreatePixelShader(mPSBlob->GetBufferPointer(), mPSBlob->GetBufferSize(), nullptr, &mPS);
+	return true;
+}
+
+
+bool GraphicsEngine::setShaders()
+{
+	mImmDeviceContext->mDeviceContext->VSSetShader(mVS, nullptr, 0);
+	mImmDeviceContext->mDeviceContext->PSSetShader(mPS, nullptr, 0);
+	return true;
+}
+
+void GraphicsEngine::getShaderBufferAndSize(void** bytecode, UINT* size)
+{
+	*bytecode = this->mVSBlob->GetBufferPointer();
+	*size = (UINT)this->mVSBlob->GetBufferSize();
 }

@@ -1,5 +1,9 @@
 #include "VertexBuffer.h"
 #include "GraphicsEngine.h"
+#include <iostream>
+#include <system_error>
+
+using namespace std;
 
 VertexBuffer::VertexBuffer(): mInputLayout(0), mBuffer(0)
 {
@@ -30,13 +34,16 @@ bool VertexBuffer::load(void* vertList, UINT vertSize, UINT listSize, void* shad
 
 	D3D11_INPUT_ELEMENT_DESC inputElementDesc[] = {
 		//SEMANTIC NAME - SEMANTIC INDEX - FORMAT - INPUT SLOT - ALIGNED BYTE OFFSET - INPUT SLOT CLASS - INSTANCE DATA STEP RATE
-		{"POSITION", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0}
+		{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0}
 	};
 	UINT inputElementDescSize = ARRAYSIZE(inputElementDesc);
 
 	hr = GraphicsEngine::get()->mD3dDevice->CreateInputLayout(inputElementDesc, inputElementDescSize, shaderByteCode, byteShaderSize, &mInputLayout);
-	if (FAILED(hr))
+	if (FAILED(hr)) {
+		std::string message = std::system_category().message(hr);
+		cout << message;
 		return false;
+	}
 
 	return true;
 }

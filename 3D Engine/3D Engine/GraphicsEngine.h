@@ -17,6 +17,7 @@ public:
 
 	SwapChain* createSwapShain();
 	DeviceContext* getImmDeviceContext();
+	VertexBuffer* createVertexBuffer();
 private:
 	ID3D11Device* mD3dDevice;
 	D3D_FEATURE_LEVEL mFeatureLevel;

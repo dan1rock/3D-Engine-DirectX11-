@@ -2,14 +2,16 @@
 #include <d3d11.h>
 
 class SwapChain;
+class VertexBuffer;
 
 class DeviceContext
 {
 public:
 	DeviceContext(ID3D11DeviceContext* deviceContext);
-
-	bool clearRenderTarget(SwapChain* swapChain, float r, float g, float b, float a);
-
+	void clearRenderTarget(SwapChain* swapChain, float r, float g, float b, float a);
+	void setVertexBuffer(VertexBuffer* vertexBuffer);
+	void drawTriangleList(UINT vertexCount, UINT startIndex);
+	void setViewportSize(UINT width, UINT height);
 	bool release();
 	~DeviceContext();
 private:

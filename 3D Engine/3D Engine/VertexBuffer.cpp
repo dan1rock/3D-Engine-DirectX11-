@@ -41,10 +41,16 @@ bool VertexBuffer::load(void* vertList, UINT vertSize, UINT listSize, void* shad
 	return true;
 }
 
+UINT VertexBuffer::getVertexListSize()
+{
+	return this->mListSize;
+}
+
 bool VertexBuffer::release()
 {
 	mBuffer->Release();
 	mInputLayout->Release();
+	delete this;
 	return true;
 }
 

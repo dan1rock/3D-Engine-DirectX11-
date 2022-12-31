@@ -26,8 +26,9 @@ void AppWindow::onCreate()
 
 	vertex vertexList[] = {
 		{-0.5f, -0.5f, 0.0f},
-		{0.0f, 0.5f, 0.0f},
-		{0.5f, -0.5f, 0.0f}
+		{-0.5f, 0.5f, 0.0f},
+		{0.5f, -0.5f, 0.0f},
+		{0.5f, 0.5f, 0.0f}
 	};
 
 	mVertexBuffer = GraphicsEngine::get()->createVertexBuffer();
@@ -49,7 +50,7 @@ void AppWindow::onUpdate()
 	GraphicsEngine::get()->getImmDeviceContext()->setViewportSize(windowSize.right - windowSize.left, windowSize.bottom - windowSize.top);
 	GraphicsEngine::get()->setShaders();
 	GraphicsEngine::get()->getImmDeviceContext()->setVertexBuffer(mVertexBuffer);
-	GraphicsEngine::get()->getImmDeviceContext()->drawTriangleList(mVertexBuffer->getVertexListSize(), 0);
+	GraphicsEngine::get()->getImmDeviceContext()->drawTriangleStrip(mVertexBuffer->getVertexListSize(), 0);
 	mSwapChain->present(false);
 }
 

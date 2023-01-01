@@ -2,6 +2,7 @@
 #include "SwapChain.h"
 #include "DeviceContext.h"
 #include "VertexBuffer.h"
+#include "VertexShader.h"
 #include <d3dcompiler.h>
 
 
@@ -79,13 +80,41 @@ VertexBuffer* GraphicsEngine::createVertexBuffer()
 	return new VertexBuffer();
 }
 
+VertexShader* GraphicsEngine::createVertexShader(const void* shaderBytecode, SIZE_T bytecodeLength)
+{
+	VertexShader* vs = new VertexShader();
+	if (!vs->init(shaderBytecode, bytecodeLength)) {
+		vs->release();
+		return nullptr;
+	};
+
+	return vs;
+}
+
+bool GraphicsEngine::compileVertexShader(const wchar_t* fileName, const char* entryPoint, void** shaderBytecode, SIZE_T* bytecodeLength)
+{
+	ID3DBlob* errblob = nullptr;
+	if (FAILED(D3DCompileFromFile(fileName, nullptr, nullptr, entryPoint, "vs_5_0", 0, 0, &mVSBlob, &errblob))) {
+		if(errblob) errblob->Release();
+		return false;
+	};
+
+	*shaderBytecode = mVSBlob->GetBufferPointer();
+	*bytecodeLength = mVSBlob->GetBufferSize();
+
+	return true;
+}
+
+void GraphicsEngine::releaseVertexShader()
+{
+	if(mVSBlob) mVSBlob->Release();
+}
+
 bool GraphicsEngine::createShaders()
 
 {
 	ID3DBlob* errblob = nullptr;
-	D3DCompileFromFile(L"shader.fx", nullptr, nullptr, "vsmain", "vs_5_0", NULL, NULL, &mVSBlob, &errblob);
 	D3DCompileFromFile(L"shader.fx", nullptr, nullptr, "psmain", "ps_5_0", NULL, NULL, &mPSBlob, &errblob);
-	mD3dDevice->CreateVertexShader(mVSBlob->GetBufferPointer(), mVSBlob->GetBufferSize(), nullptr, &mVS);
 	mD3dDevice->CreatePixelShader(mPSBlob->GetBufferPointer(), mPSBlob->GetBufferSize(), nullptr, &mPS);
 	return true;
 }
@@ -93,13 +122,6 @@ bool GraphicsEngine::createShaders()
 
 bool GraphicsEngine::setShaders()
 {
-	mImmDeviceContext->mDeviceContext->VSSetShader(mVS, nullptr, 0);
 	mImmDeviceContext->mDeviceContext->PSSetShader(mPS, nullptr, 0);
 	return true;
-}
-
-void GraphicsEngine::getShaderBufferAndSize(void** bytecode, UINT* size)
-{
-	*bytecode = this->mVSBlob->GetBufferPointer();
-	*size = (UINT)this->mVSBlob->GetBufferSize();
 }

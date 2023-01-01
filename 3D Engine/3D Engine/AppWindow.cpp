@@ -28,7 +28,8 @@ void AppWindow::onCreate()
 		{-0.5f, -0.5f, 0.0f},
 		{-0.5f, 0.5f, 0.0f},
 		{0.5f, -0.5f, 0.0f},
-		{0.5f, 0.5f, 0.0f}
+		{0.7f, 0.3f, 0.0f},
+		{0.9f, -0.2f, 0.0f}
 	};
 
 	mVertexBuffer = GraphicsEngine::get()->createVertexBuffer();
@@ -36,11 +37,14 @@ void AppWindow::onCreate()
 	GraphicsEngine::get()->createShaders();
 
 	void* shaderByteCode = nullptr;
-	UINT shaderSize = 0;
+	SIZE_T shaderSize = 0;
 
-	GraphicsEngine::get()->getShaderBufferAndSize(&shaderByteCode, &shaderSize);
+	GraphicsEngine::get()->compileVertexShader(L"VertexShader.hlsl", "main", &shaderByteCode, &shaderSize);
+	mVertexShader = GraphicsEngine::get()->createVertexShader(shaderByteCode, shaderSize);
 
 	mVertexBuffer->load(vertexList, sizeof(vertex), ARRAYSIZE(vertexList), shaderByteCode, shaderSize);
+
+	GraphicsEngine::get()->releaseVertexShader();
 }
 
 void AppWindow::onUpdate()
@@ -49,6 +53,7 @@ void AppWindow::onUpdate()
 	RECT windowSize = this->getClientWindowRect();
 	GraphicsEngine::get()->getImmDeviceContext()->setViewportSize(windowSize.right - windowSize.left, windowSize.bottom - windowSize.top);
 	GraphicsEngine::get()->setShaders();
+	GraphicsEngine::get()->getImmDeviceContext()->setVertexShader(mVertexShader);
 	GraphicsEngine::get()->getImmDeviceContext()->setVertexBuffer(mVertexBuffer);
 	GraphicsEngine::get()->getImmDeviceContext()->drawTriangleStrip(mVertexBuffer->getVertexListSize(), 0);
 	mSwapChain->present(false);

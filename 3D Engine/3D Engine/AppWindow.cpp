@@ -6,6 +6,7 @@ struct vector3 {
 
 struct vertex {
 	vector3 pos;
+	vector3 col;
 };
 
 AppWindow::AppWindow()
@@ -25,11 +26,11 @@ void AppWindow::onCreate()
 	mSwapChain->init(this->mHwnd, windowSize.right - windowSize.left, windowSize.bottom - windowSize.top);
 
 	vertex vertexList[] = {
-		{-0.5f, -0.5f, 0.0f},
-		{-0.5f, 0.5f, 0.0f},
-		{0.5f, -0.5f, 0.0f},
-		{0.7f, 0.3f, 0.0f},
-		{0.9f, -0.2f, 0.0f}
+		{-0.5f, -0.5f, 0.0f,	1, 0, 0},
+		{-0.5f, 0.5f, 0.0f,		1, 0, 0},
+		{0.5f, -0.5f, 0.0f,		1, 0, 0},
+		{0.7f, 0.3f, 0.0f,		1, 0, 0},
+		{0.9f, -0.2f, 0.0f,		1, 0, 0}
 	};
 
 	mVertexBuffer = GraphicsEngine::get()->createVertexBuffer();

@@ -3,6 +3,7 @@
 #include "DeviceContext.h"
 #include "VertexBuffer.h"
 #include "VertexShader.h"
+#include "PixelShader.h"
 #include <d3dcompiler.h>
 
 
@@ -91,6 +92,17 @@ VertexShader* GraphicsEngine::createVertexShader(const void* shaderBytecode, SIZ
 	return vs;
 }
 
+PixelShader* GraphicsEngine::createPixelShader(const void* shaderBytecode, SIZE_T bytecodeLength)
+{
+	PixelShader* ps = new PixelShader();
+	if (!ps->init(shaderBytecode, bytecodeLength)) {
+		ps->release();
+		return nullptr;
+	};
+
+	return ps;
+}
+
 bool GraphicsEngine::compileVertexShader(const wchar_t* fileName, const char* entryPoint, void** shaderBytecode, SIZE_T* bytecodeLength)
 {
 	ID3DBlob* errblob = nullptr;
@@ -110,18 +122,21 @@ void GraphicsEngine::releaseVertexShader()
 	if(mVSBlob) mVSBlob->Release();
 }
 
-bool GraphicsEngine::createShaders()
-
+bool GraphicsEngine::compilePixelShader(const wchar_t* fileName, const char* entryPoint, void** shaderBytecode, SIZE_T* bytecodeLength)
 {
 	ID3DBlob* errblob = nullptr;
-	D3DCompileFromFile(L"shader.fx", nullptr, nullptr, "psmain", "ps_5_0", NULL, NULL, &mPSBlob, &errblob);
-	mD3dDevice->CreatePixelShader(mPSBlob->GetBufferPointer(), mPSBlob->GetBufferSize(), nullptr, &mPS);
+	if (FAILED(D3DCompileFromFile(fileName, nullptr, nullptr, entryPoint, "ps_5_0", 0, 0, &mPSBlob, &errblob))) {
+		if (errblob) errblob->Release();
+		return false;
+	};
+
+	*shaderBytecode = mPSBlob->GetBufferPointer();
+	*bytecodeLength = mPSBlob->GetBufferSize();
+
 	return true;
 }
 
-
-bool GraphicsEngine::setShaders()
+void GraphicsEngine::releasePixelShader()
 {
-	mImmDeviceContext->mDeviceContext->PSSetShader(mPS, nullptr, 0);
-	return true;
+	if (mPSBlob) mPSBlob->Release();
 }

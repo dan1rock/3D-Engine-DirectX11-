@@ -7,54 +7,66 @@
     <Filter Include="Engine">
       <UniqueIdentifier>{5beb5d2a-2ebd-4ec8-a0b4-ebdef2914e0d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Header">
+      <UniqueIdentifier>{ffe86291-3149-43b4-a9bc-f12ff630457b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source">
+      <UniqueIdentifier>{b6f99c78-495c-4d4c-93de-3e1e4f0f2331}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="Window.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="AppWindow.cpp">
       <Filter>Main</Filter>
     </ClCompile>
+    <ClCompile Include="DeviceContext.cpp">
+      <Filter>Engine\Source</Filter>
+    </ClCompile>
     <ClCompile Include="GraphicsEngine.cpp">
-      <Filter>Engine</Filter>
+      <Filter>Engine\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="PixelShader.cpp">
+      <Filter>Engine\Source</Filter>
     </ClCompile>
     <ClCompile Include="SwapChain.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="DeviceContext.cpp">
-      <Filter>Engine</Filter>
+      <Filter>Engine\Source</Filter>
     </ClCompile>
     <ClCompile Include="VertexBuffer.cpp">
-      <Filter>Engine</Filter>
+      <Filter>Engine\Source</Filter>
     </ClCompile>
     <ClCompile Include="VertexShader.cpp">
-      <Filter>Engine</Filter>
+      <Filter>Engine\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Engine\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Window.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="AppWindow.h">
       <Filter>Main</Filter>
     </ClInclude>
-    <ClInclude Include="GraphicsEngine.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="SwapChain.h">
-      <Filter>Engine</Filter>
+    <ClInclude Include="VertexShader.h">
+      <Filter>Engine\Header</Filter>
     </ClInclude>
     <ClInclude Include="DeviceContext.h">
-      <Filter>Engine</Filter>
+      <Filter>Engine\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine.h">
+      <Filter>Engine\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="SwapChain.h">
+      <Filter>Engine\Header</Filter>
     </ClInclude>
     <ClInclude Include="VertexBuffer.h">
-      <Filter>Engine</Filter>
+      <Filter>Engine\Header</Filter>
     </ClInclude>
-    <ClInclude Include="VertexShader.h">
-      <Filter>Engine</Filter>
+    <ClInclude Include="Window.h">
+      <Filter>Engine\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="PixelShader.h">
+      <Filter>Engine\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

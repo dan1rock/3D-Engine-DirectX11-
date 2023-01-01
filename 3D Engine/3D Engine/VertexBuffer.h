@@ -12,8 +12,8 @@ public:
 	bool release();
 	~VertexBuffer();
 private:
-	UINT mVertSize;
-	UINT mListSize;
+	UINT mVertSize = 0;
+	UINT mListSize = 0;
 
 	ID3D11Buffer* mBuffer;
 	ID3D11InputLayout* mInputLayout;

@@ -27,19 +27,19 @@ public:
 	bool createShaders();
 	bool setShaders();
 private:
-	ID3D11Device* mD3dDevice;
-	D3D_FEATURE_LEVEL mFeatureLevel;
-	DeviceContext* mImmDeviceContext;
+	ID3D11Device* mD3dDevice = nullptr;
+	D3D_FEATURE_LEVEL mFeatureLevel = {};
+	DeviceContext* mImmDeviceContext = nullptr;
 
-	IDXGIDevice* mDxgiDevice;
-	IDXGIAdapter* mDxgiAdapter;
-	IDXGIFactory* mDxgiFactory;
+	IDXGIDevice* mDxgiDevice = nullptr;
+	IDXGIAdapter* mDxgiAdapter = nullptr;
+	IDXGIFactory* mDxgiFactory = nullptr;
 
-	ID3DBlob* mVSBlob;
-	ID3DBlob* mPSBlob;
+	ID3DBlob* mVSBlob = nullptr;
+	ID3DBlob* mPSBlob = nullptr;
 
-	ID3D11VertexShader* mVS;
-	ID3D11PixelShader* mPS;
+	ID3D11VertexShader* mVS = nullptr;
+	ID3D11PixelShader* mPS = nullptr;
 
 	friend class SwapChain;
 	friend class VertexBuffer;

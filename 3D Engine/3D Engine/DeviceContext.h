@@ -3,6 +3,7 @@
 
 class SwapChain;
 class VertexBuffer;
+class ConstantBuffer;
 class VertexShader;
 class GraphicsEngine;
 class PixelShader;
@@ -18,11 +19,13 @@ public:
 	void setViewportSize(UINT width, UINT height);
 	void setVertexShader(VertexShader* vertexShader);
 	void setPixelShader(PixelShader* pixelShader);
+	void setConstantBuffer(VertexShader* vertexShader, ConstantBuffer* buffer);
+	void setConstantBuffer(PixelShader* pixelShader, ConstantBuffer* buffer);
 	bool release();
 	~DeviceContext();
 private:
 	ID3D11DeviceContext* mDeviceContext;
 
-	friend class GraphicsEngine;
+	friend class ConstantBuffer;
 };
 

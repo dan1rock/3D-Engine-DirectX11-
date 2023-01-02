@@ -17,7 +17,7 @@ bool VertexBuffer::load(void* vertList, UINT vertSize, UINT listSize, void* shad
 	D3D11_BUFFER_DESC bufferDesc = {};
 	bufferDesc.Usage = D3D11_USAGE_DEFAULT;
 	bufferDesc.ByteWidth = vertSize * listSize;
-	bufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
+	bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 	bufferDesc.CPUAccessFlags = 0;
 	bufferDesc.MiscFlags = 0;
 

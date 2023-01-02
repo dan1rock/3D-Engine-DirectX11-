@@ -13,6 +13,9 @@
     <Filter Include="Engine\Source">
       <UniqueIdentifier>{b6f99c78-495c-4d4c-93de-3e1e4f0f2331}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{393f5ef0-2c51-43b8-904a-c66563a9d831}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -73,6 +76,9 @@
     </ClInclude>
     <ClInclude Include="ConstantBuffer.h">
       <Filter>Engine\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

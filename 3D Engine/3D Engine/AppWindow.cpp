@@ -1,13 +1,10 @@
 #include "AppWindow.h"
+#include "Vector3.h"
 #include <Windows.h>
 
-struct vector3 {
-	float x, y, z;
-};
-
 struct vertex {
-	vector3 pos;
-	vector3 col;
+	Vector3 pos;
+	Vector3 col;
 };
 
 __declspec(align(16))
@@ -32,11 +29,11 @@ void AppWindow::onCreate()
 	mSwapChain->init(this->mHwnd, windowSize.right - windowSize.left, windowSize.bottom - windowSize.top);
 
 	vertex vertexList[] = {
-		{-0.5f, -0.5f, 0.0f,	1, 1, 0},
-		{-0.5f, 0.5f, 0.0f,		1, 1, 0},
-		{0.5f, -0.5f, 0.0f,		1, 1, 0},
-		{0.7f, 0.3f, 0.0f,		1, 1, 0},
-		{0.9f, -0.2f, 0.0f,		1, 1, 0}
+		{Vector3(-0.5f, -0.5f, 0.0f),	Vector3(1, 1, 0)},
+		{Vector3(-0.5f, 0.5f, 0.0f)	,	Vector3(1, 1, 0)},
+		{Vector3(0.5f, -0.5f, 0.0f)	,	Vector3(1, 1, 0)},
+		{Vector3(0.7f, 0.3f, 0.0f)	,	Vector3(1, 1, 0)},
+		{Vector3(0.9f, -0.2f, 0.0f)	,	Vector3(1, 1, 0)}
 	};
 
 	mVertexBuffer = GraphicsEngine::engine()->createVertexBuffer();

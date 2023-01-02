@@ -11,7 +11,7 @@ SwapChain::SwapChain()
 
 bool SwapChain::init(HWND hwnd, UINT width, UINT height)
 {
-	ID3D11Device* device = GraphicsEngine::get()->mD3dDevice;
+	ID3D11Device* device = GraphicsEngine::engine()->mD3dDevice;
 
 	DXGI_SWAP_CHAIN_DESC desc;
 	ZeroMemory(&desc, sizeof(DXGI_SWAP_CHAIN_DESC));
@@ -32,7 +32,7 @@ bool SwapChain::init(HWND hwnd, UINT width, UINT height)
 	desc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 	
 
-	HRESULT hr = GraphicsEngine::get()->mDxgiFactory->CreateSwapChain(device, &desc, &mSwapChain);
+	HRESULT hr = GraphicsEngine::engine()->mDxgiFactory->CreateSwapChain(device, &desc, &mSwapChain);
 	if (FAILED(hr)) {
 		std::string message = std::system_category().message(hr);
 		cout << message;

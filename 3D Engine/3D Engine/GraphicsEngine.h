@@ -16,7 +16,7 @@ public:
 	bool release();
 	~GraphicsEngine();
 
-	static GraphicsEngine* get();
+	static GraphicsEngine* engine();
 
 	SwapChain* createSwapShain();
 	DeviceContext* getImmDeviceContext();

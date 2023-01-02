@@ -61,7 +61,7 @@ GraphicsEngine::~GraphicsEngine()
 {
 }
 
-GraphicsEngine* GraphicsEngine::get()
+GraphicsEngine* GraphicsEngine::engine()
 {
 	static GraphicsEngine engine;
 	return &engine;

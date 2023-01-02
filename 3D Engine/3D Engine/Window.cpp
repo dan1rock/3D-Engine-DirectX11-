@@ -51,7 +51,7 @@ bool Window::init()
 	if (!::RegisterClassEx(&wc))
 		return false;
 
-	mHwnd = ::CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, L"WindowClass", L"3D Engine", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 1280, 720, NULL, NULL, NULL, NULL);
+	mHwnd = ::CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, L"WindowClass", L"3D Engine", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 720, 720, NULL, NULL, NULL, NULL);
 	if (!mHwnd)
 		return false;
 	::ShowWindow(mHwnd, SW_SHOW);

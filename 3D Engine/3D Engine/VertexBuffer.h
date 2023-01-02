@@ -15,8 +15,8 @@ private:
 	UINT mVertSize = 0;
 	UINT mListSize = 0;
 
-	ID3D11Buffer* mBuffer;
-	ID3D11InputLayout* mInputLayout;
+	ID3D11Buffer* mBuffer = nullptr;
+	ID3D11InputLayout* mInputLayout = nullptr;
 
 	friend class DeviceContext;
 };

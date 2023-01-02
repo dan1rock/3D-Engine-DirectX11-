@@ -5,7 +5,7 @@
 
 using namespace std;
 
-VertexBuffer::VertexBuffer(): mInputLayout(0), mBuffer(0)
+VertexBuffer::VertexBuffer()
 {
 }
 

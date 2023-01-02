@@ -1,5 +1,6 @@
 #include "AppWindow.h"
 #include "Vector3.h"
+#include "Matrix.h"
 #include <Windows.h>
 
 struct vertex {
@@ -9,11 +10,31 @@ struct vertex {
 
 __declspec(align(16))
 struct constant {
+	Matrix world;
+	Matrix view;
+	Matrix projection;
 	unsigned int time;
 };
 
 AppWindow::AppWindow()
 {
+}
+
+void AppWindow::updatePosition()
+{
+	constant data = {};
+	data.time = ::GetTickCount64();
+	data.world.setTranslation(Vector3(0, 0, 0));
+	data.view.setIdentity();
+	RECT rc = this->getClientWindowRect();
+	data.projection.setOrthoPM(
+		(rc.right - rc.left) / 300.0f,
+		(rc.bottom - rc.top) / 300.0f,
+		-4.0f,
+		4.0f
+	);
+
+	mConstantBuffer->update(GraphicsEngine::engine()->getImmDeviceContext(), &data);
 }
 
 AppWindow::~AppWindow()
@@ -62,9 +83,8 @@ void AppWindow::onUpdate()
 	RECT windowSize = this->getClientWindowRect();
 	GraphicsEngine::engine()->getImmDeviceContext()->setViewportSize(windowSize.right - windowSize.left, windowSize.bottom - windowSize.top);
 
-	constant data = {};
-	data.time = ::GetTickCount64();
-	mConstantBuffer->update(GraphicsEngine::engine()->getImmDeviceContext(), &data);
+	this->updatePosition();
+
 	GraphicsEngine::engine()->getImmDeviceContext()->setConstantBuffer(mVertexShader, mConstantBuffer);
 	GraphicsEngine::engine()->getImmDeviceContext()->setConstantBuffer(mPixelShader, mConstantBuffer);
 

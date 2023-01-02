@@ -102,5 +102,6 @@ void AppWindow::onDestroy()
 	mVertexBuffer->release();
 	mVertexShader->release();
 	mPixelShader->release();
+	mConstantBuffer->release();
 	GraphicsEngine::engine()->release();
 }

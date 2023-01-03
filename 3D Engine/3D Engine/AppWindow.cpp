@@ -83,7 +83,7 @@ void AppWindow::onCreate()
 		{Vector3(-0.5f, 0.5f, -0.5f)	,	Vector3(1, 0, 1)},// 1
 		{Vector3(0.5f, 0.5f, -0.5f)		,	Vector3(0, 1, 1)},// 2
 		{Vector3(0.5f, -0.5f, -0.5f)	,	Vector3(1, 1, 1)},// 3
-		////
+		
 		{Vector3(0.5f, -0.5f, 0.5f)		,	Vector3(0, 1, 0)},// 4
 		{Vector3(0.5f, 0.5f, 0.5f)		,	Vector3(0, 1, 1)},// 5
 		{Vector3(-0.5f, 0.5f, 0.5f)		,	Vector3(1, 1, 1)},// 6
@@ -91,18 +91,19 @@ void AppWindow::onCreate()
 	};
 	*/
 
+	/*
 	vertex vertexList[] = {
-		{Vector3(-0.5f, -0.5f, -0.5f)	,	Vector3(1, 1, 0)},
-		{Vector3(-0.5f, 0.5f, -0.5f)	,	Vector3(1, 1, 0)},
-		{Vector3(0.5f, 0.5f, -0.5f)		,	Vector3(1, 1, 0)},
+		{Vector3(-0.5f, -0.5f, -0.5f)	,	Vector3(1, 1, 0)},// 0
+		{Vector3(-0.5f, 0.5f, -0.5f)	,	Vector3(1, 1, 0)},// 1
+		{Vector3(0.5f, 0.5f, -0.5f)		,	Vector3(1, 1, 0)},// 2
 
-		{Vector3(0.5f, 0.5f, -0.5f)		,	Vector3(1, 1, 0)},
-		{Vector3(0.5f, -0.5f, -0.5f)	,	Vector3(1, 1, 0)},
-		{Vector3(-0.5f, -0.5f, -0.5f)	,	Vector3(1, 1, 0)},
+		{Vector3(0.5f, 0.5f, -0.5f)		,	Vector3(1, 1, 0)},// 2
+		{Vector3(0.5f, -0.5f, -0.5f)	,	Vector3(1, 1, 0)},// 3
+		{Vector3(-0.5f, -0.5f, -0.5f)	,	Vector3(1, 1, 0)},// 0
 
-		{Vector3(0.5f, -0.5f, 0.5f)		,	Vector3(0.5f, 0.5f, 0)},
-		{Vector3(0.5f, 0.5f, 0.5f)		,	Vector3(0.5f, 0.5f, 0)},
-		{Vector3(-0.5f, 0.5f, 0.5f)		,	Vector3(0.5f, 0.5f, 0)},
+		{Vector3(0.5f, -0.5f, 0.5f)		,	Vector3(0.5f, 0.5f, 0)},// 4
+		{Vector3(0.5f, 0.5f, 0.5f)		,	Vector3(0.5f, 0.5f, 0)},// 5
+		{Vector3(-0.5f, 0.5f, 0.5f)		,	Vector3(0.5f, 0.5f, 0)},// 6
 
 		{Vector3(-0.5f, 0.5f, 0.5f)		,	Vector3(0.5f, 0.5f, 0)},// 6
 		{Vector3(-0.5f, -0.5f, 0.5f)	,	Vector3(0.5f, 0.5f, 0)},// 7
@@ -124,13 +125,13 @@ void AppWindow::onCreate()
 		{Vector3(0.5f, -0.5f, 0.5f)		,	Vector3(0.9f, 0.9f, 0)},// 4
 		{Vector3(-0.5f, -0.5f, 0.5f)	,	Vector3(0.9f, 0.9f, 0)},// 7
 
-		{Vector3(0.5f, -0.5f, -0.5f)	,	Vector3(0.3f, 0.3f, 0)},// 3
-		{Vector3(0.5f, 0.5f, -0.5f)		,	Vector3(0.3f, 0.3f, 0)},// 2
-		{Vector3(0.5f, 0.5f, 0.5f)		,	Vector3(0.3f, 0.3f, 0)},// 5
+		{Vector3(0.5f, -0.5f, -0.5f)	,	Vector3(0.6f, 0.6f, 0)},// 3
+		{Vector3(0.5f, 0.5f, -0.5f)		,	Vector3(0.6f, 0.6f, 0)},// 2
+		{Vector3(0.5f, 0.5f, 0.5f)		,	Vector3(0.6f, 0.6f, 0)},// 5
 
-		{Vector3(0.5f, 0.5f, 0.5f)		,	Vector3(0.3f, 0.3f, 0)},// 5
-		{Vector3(0.5f, -0.5f, 0.5f)		,	Vector3(0.3f, 0.3f, 0)},// 4
-		{Vector3(0.5f, -0.5f, -0.5f)	,	Vector3(0.3f, 0.3f, 0)},// 3
+		{Vector3(0.5f, 0.5f, 0.5f)		,	Vector3(0.6f, 0.6f, 0)},// 5
+		{Vector3(0.5f, -0.5f, 0.5f)		,	Vector3(0.6f, 0.6f, 0)},// 4
+		{Vector3(0.5f, -0.5f, -0.5f)	,	Vector3(0.6f, 0.6f, 0)},// 3
 
 		{Vector3(-0.5f, -0.5f, 0.5f)	,	Vector3(0.8f, 0.8f, 0)},// 7
 		{Vector3(-0.5f, 0.5f, 0.5f)		,	Vector3(0.8f, 0.8f, 0)},// 6
@@ -139,6 +140,25 @@ void AppWindow::onCreate()
 		{Vector3(-0.5f, 0.5f, -0.5f)	,	Vector3(0.8f, 0.8f, 0)},// 1
 		{Vector3(-0.5f, -0.5f, -0.5f)	,	Vector3(0.8f, 0.8f, 0)},// 0
 		{Vector3(-0.5f, -0.5f, 0.5f)	,	Vector3(0.8f, 0.8f, 0)} // 7
+	};
+	*/
+
+	vertex vertexList[] = {
+		{Vector3(-0.5f, 0.5f, -0.5f)	,	Vector3(1, 1, 0)},// 1
+		{Vector3(-0.5f, -0.5f, -0.5f)	,	Vector3(1, 1, 0)},// 0
+		{Vector3(0.5f, 0.0f, -0.5f)		,	Vector3(1, 1, 0)},// 2
+
+		{Vector3(0.0f, 0.0f, 0.5f)		,	Vector3(0.7f, 0.7f, 0)},// 3
+		{Vector3(-0.5f, 0.5f, -0.5f)	,	Vector3(0.7f, 0.7f, 0)},// 1
+		{Vector3(0.5f, 0.0f, -0.5f)		,	Vector3(0.7f, 0.7f, 0)},// 2
+
+		{Vector3(0.0f, 0.0f, 0.5f)		,	Vector3(0.9f, 0.9f, 0)},// 3
+		{Vector3(0.5f, 0.0f, -0.5f)		,	Vector3(0.9f, 0.9f, 0)},// 2
+		{Vector3(-0.5f, -0.5f, -0.5f)	,	Vector3(0.9f, 0.9f, 0)},// 0
+		
+		{Vector3(-0.5f, -0.5f, -0.5f)	,	Vector3(0.8f, 0.8f, 0)},// 0
+		{Vector3(-0.5f, 0.5f, -0.5f)	,	Vector3(0.8f, 0.8f, 0)},// 1
+		{Vector3(0.0f, 0.0f, 0.5f)		,	Vector3(0.8f, 0.8f, 0)},// 3
 	};
 
 	unsigned int indexList[] = {

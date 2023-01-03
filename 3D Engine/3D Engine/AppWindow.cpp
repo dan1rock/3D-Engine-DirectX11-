@@ -32,13 +32,25 @@ void AppWindow::updatePosition()
 	constant data = {};
 	data.time = ::GetTickCount64();
 
-	deltaPos += deltaTime * 1.0f;
+	deltaPos += deltaTime / 50.0f;
 
 	Matrix trans;
 
-	trans.setTranslation(Vector3::lerp(Vector3(-1, -1, 0), Vector3(1, 1, 0), (cos(deltaPos) + 1.0f) / 2.0f));
-	data.world.setScale(Vector3::lerp(Vector3(0.5f, 0.5f, 0), Vector3(1, 1, 0), (sin(deltaPos) + 1.0f) / 2.0f));
+	//trans.setTranslation(Vector3::lerp(Vector3(-1, -1, 0), Vector3(1, 1, 0), (cos(deltaPos) + 1.0f) / 2.0f));
+	//data.world.setScale(Vector3::lerp(Vector3(0.5f, 0.5f, 0), Vector3(1, 1, 0), (sin(deltaPos) + 1.0f) / 2.0f));
+	//trans.setTranslation(Vector3(0, 0, 0));
+	data.world.setScale(Vector3(1, 1, 1));
 
+	trans.setIdentity();
+	trans.setRotationX(sin(deltaPos) * 90.0f);
+	data.world *= trans;
+
+	trans.setIdentity();
+	trans.setRotationY(cos(deltaPos) * 90.0f);
+	data.world *= trans;
+
+	trans.setIdentity();
+	trans.setRotationZ(30.0f);
 	data.world *= trans;
 	
 	data.view.setIdentity();
@@ -66,14 +78,39 @@ void AppWindow::onCreate()
 	mSwapChain->init(this->mHwnd, windowSize.right - windowSize.left, windowSize.bottom - windowSize.top);
 
 	vertex vertexList[] = {
-		{Vector3(-0.5f, -0.5f, 0.0f),	Vector3(1, 1, 0)},
-		{Vector3(-0.5f, 0.5f, 0.0f)	,	Vector3(1, 0, 1)},
-		{Vector3(0.5f, -0.5f, 0.0f)	,	Vector3(0, 1, 1)},
-		{Vector3(0.7f, 0.3f, 0.0f)	,	Vector3(1, 1, 1)},
-		{Vector3(0.9f, -0.2f, 0.0f)	,	Vector3(0, 1, 0)}
+		{Vector3(-0.5f, -0.5f, -0.5f)	,	Vector3(1, 1, 0)},
+		{Vector3(-0.5f, 0.5f, -0.5f)	,	Vector3(1, 0, 1)},
+		{Vector3(0.5f, 0.5f, -0.5f)		,	Vector3(0, 1, 1)},
+		{Vector3(0.5f, -0.5f, -0.5f)	,	Vector3(1, 1, 1)},
+		////
+		{Vector3(0.5f, -0.5f, 0.5f)		,	Vector3(0, 1, 0)},
+		{Vector3(0.5f, 0.5f, 0.5f)		,	Vector3(0, 1, 1)},
+		{Vector3(-0.5f, 0.5f, 0.5f)		,	Vector3(1, 1, 1)},
+		{Vector3(-0.5f, -0.5f, 0.5f)	,	Vector3(0, 1, 0)}
+	};
+
+	unsigned int indexList[] = {
+		0,1,2,
+		2,3,0,
+
+		4,5,6,
+		6,7,4,
+
+		1,6,5,
+		5,2,1,
+
+		7,0,3,
+		3,4,7,
+
+		3,2,5,
+		5,4,3,
+
+		7,6,1,
+		1,0,7
 	};
 
 	mVertexBuffer = GraphicsEngine::engine()->createVertexBuffer();
+	mIndexBuffer = GraphicsEngine::engine()->createIndexBuffer();
 	mConstantBuffer = GraphicsEngine::engine()->createConstantBuffer();
 
 	void* shaderByteCode = nullptr;
@@ -82,6 +119,7 @@ void AppWindow::onCreate()
 	GraphicsEngine::engine()->compileVertexShader(L"VertexShader.hlsl", "main", &shaderByteCode, &shaderSize);
 	mVertexShader = GraphicsEngine::engine()->createVertexShader(shaderByteCode, shaderSize);
 	mVertexBuffer->load(vertexList, sizeof(vertex), ARRAYSIZE(vertexList), shaderByteCode, shaderSize);
+	mIndexBuffer->load(indexList, ARRAYSIZE(indexList));
 	GraphicsEngine::engine()->releaseVertexShader();
 
 	GraphicsEngine::engine()->compilePixelShader(L"PixelShader.hlsl", "main", &shaderByteCode, &shaderSize);
@@ -107,7 +145,9 @@ void AppWindow::onUpdate()
 	GraphicsEngine::engine()->getImmDeviceContext()->setVertexShader(mVertexShader);
 	GraphicsEngine::engine()->getImmDeviceContext()->setPixelShader(mPixelShader);
 	GraphicsEngine::engine()->getImmDeviceContext()->setVertexBuffer(mVertexBuffer);
-	GraphicsEngine::engine()->getImmDeviceContext()->drawTriangleStrip(mVertexBuffer->getVertexListSize(), 0);
+	GraphicsEngine::engine()->getImmDeviceContext()->setIndexBuffer(mIndexBuffer);
+	GraphicsEngine::engine()->getImmDeviceContext()->drawIndexedTriangleList(mIndexBuffer->getVertexListSize(), 0, 0);
+	//GraphicsEngine::engine()->getImmDeviceContext()->drawTriangleStrip(mVertexBuffer->getVertexListSize(), 0);
 	mSwapChain->present(false);
 
 	updateDeltaTime();
@@ -121,5 +161,6 @@ void AppWindow::onDestroy()
 	mVertexShader->release();
 	mPixelShader->release();
 	mConstantBuffer->release();
+	mIndexBuffer->release();
 	GraphicsEngine::engine()->release();
 }

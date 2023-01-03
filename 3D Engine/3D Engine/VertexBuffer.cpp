@@ -29,8 +29,11 @@ bool VertexBuffer::load(void* vertList, UINT vertSize, UINT listSize, void* shad
 
 	HRESULT hr;
 	hr = GraphicsEngine::engine()->mD3dDevice->CreateBuffer(&bufferDesc, &subresData, &mBuffer);
-	if (FAILED(hr))
+	if (FAILED(hr)) {
+		std::string message = std::system_category().message(hr);
+		cout << message;
 		return false;
+	}
 
 	D3D11_INPUT_ELEMENT_DESC inputElementDesc[] = {
 		//SEMANTIC NAME - SEMANTIC INDEX - FORMAT - INPUT SLOT - ALIGNED BYTE OFFSET - INPUT SLOT CLASS - INSTANCE DATA STEP RATE

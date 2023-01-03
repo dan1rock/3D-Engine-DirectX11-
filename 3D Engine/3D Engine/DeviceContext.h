@@ -3,6 +3,7 @@
 
 class SwapChain;
 class VertexBuffer;
+class IndexBuffer;
 class ConstantBuffer;
 class VertexShader;
 class GraphicsEngine;
@@ -14,7 +15,9 @@ public:
 	DeviceContext(ID3D11DeviceContext* deviceContext);
 	void clearRenderTarget(SwapChain* swapChain, float r, float g, float b, float a);
 	void setVertexBuffer(VertexBuffer* vertexBuffer);
+	void setIndexBuffer(IndexBuffer* indexBuffer);
 	void drawTriangleList(UINT vertexCount, UINT startIndex);
+	void drawIndexedTriangleList(UINT indexCount, UINT startIndexLocation, UINT startIndex);
 	void drawTriangleStrip(UINT vertexCount, UINT startIndex);
 	void setViewportSize(UINT width, UINT height);
 	void setVertexShader(VertexShader* vertexShader);

@@ -20,4 +20,3 @@ private:
 
 	friend class DeviceContext;
 };
-

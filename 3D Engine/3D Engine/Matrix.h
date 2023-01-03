@@ -43,6 +43,27 @@ public:
 		mat[2][2] = scale.z;
 	}
 
+	void setRotationX(float x) {
+		mat[1][1] = cos(x);
+		mat[1][2] = sin(x);
+		mat[2][1] = -sin(x);
+		mat[2][2] = cos(x);
+	}
+
+	void setRotationY(float y) {
+		mat[0][0] = cos(y);
+		mat[0][2] = -sin(y);
+		mat[2][0] = sin(y);
+		mat[2][2] = cos(y);
+	}
+
+	void setRotationZ(float z) {
+		mat[0][0] = cos(z);
+		mat[0][1] = sin(z);
+		mat[1][0] = -sin(z);
+		mat[1][1] = cos(z);
+	}
+
 	void setOrthoPM(float width, float height, float nearPlane, float farPlane) {
 		setIdentity();
 		mat[0][0] = 2.0f / width;

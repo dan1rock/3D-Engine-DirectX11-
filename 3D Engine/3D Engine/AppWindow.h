@@ -4,6 +4,7 @@
 #include "SwapChain.h"
 #include "DeviceContext.h"
 #include "VertexBuffer.h"
+#include "IndexBuffer.h"
 #include "ConstantBuffer.h"
 #include "VertexShader.h"
 #include "PixelShader.h"
@@ -26,6 +27,7 @@ private:
 	VertexShader* mVertexShader = nullptr;
 	PixelShader* mPixelShader = nullptr;
 	ConstantBuffer* mConstantBuffer = nullptr;
+	IndexBuffer* mIndexBuffer = nullptr;
 
 	float lastTickTime = 0;
 	float currentTickTime = 0;

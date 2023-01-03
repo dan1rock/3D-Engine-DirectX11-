@@ -12,6 +12,7 @@ class AppWindow: public Window
 {
 public:
 	AppWindow();
+	void updateDeltaTime();
 	void updatePosition();
 	~AppWindow();
 
@@ -25,5 +26,11 @@ private:
 	VertexShader* mVertexShader = nullptr;
 	PixelShader* mPixelShader = nullptr;
 	ConstantBuffer* mConstantBuffer = nullptr;
+
+	float lastTickTime = 0;
+	float currentTickTime = 0;
+	float deltaTime = 0;
+
+	float deltaPos = 0;
 };
 

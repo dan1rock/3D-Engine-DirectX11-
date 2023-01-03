@@ -20,11 +20,23 @@ AppWindow::AppWindow()
 {
 }
 
+void AppWindow::updateDeltaTime()
+{
+	lastTickTime = currentTickTime;
+	currentTickTime = ::GetTickCount64();
+	deltaTime = (lastTickTime > 0) ? ((currentTickTime - lastTickTime) / 1000.0f) : 0;
+}
+
 void AppWindow::updatePosition()
 {
 	constant data = {};
 	data.time = ::GetTickCount64();
-	data.world.setTranslation(Vector3(0, 0, 0));
+
+	deltaPos += deltaTime * 1.0f;
+	if (deltaPos > 1.0f) deltaPos = 0.0f;
+
+	data.world.setTranslation(Vector3::lerp(Vector3(-1, -1, 0), Vector3(1, 1, 0), deltaPos));
+
 	data.view.setIdentity();
 	RECT rc = this->getClientWindowRect();
 	data.projection.setOrthoPM(
@@ -93,6 +105,8 @@ void AppWindow::onUpdate()
 	GraphicsEngine::engine()->getImmDeviceContext()->setVertexBuffer(mVertexBuffer);
 	GraphicsEngine::engine()->getImmDeviceContext()->drawTriangleStrip(mVertexBuffer->getVertexListSize(), 0);
 	mSwapChain->present(false);
+
+	updateDeltaTime();
 }
 
 void AppWindow::onDestroy()

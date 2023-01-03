@@ -8,6 +8,19 @@ public:
 
 	}
 
+	void operator *=(const Matrix matrix) {
+		Matrix res;
+
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				res.mat[i][j] =
+					mat[i][0] * matrix.mat[0][j] + mat[i][1] * matrix.mat[1][j] +
+					mat[i][2] * matrix.mat[2][j] + mat[i][3] * matrix.mat[3][j];
+			}
+		}
+		::memcpy(mat, res.mat, sizeof(float) * 16);
+	}
+
 	void setIdentity() {
 		::memset(mat, 0, sizeof(float) * 16);
 		mat[0][0] = 1;
@@ -21,6 +34,13 @@ public:
 		mat[3][0] = vector.x;
 		mat[3][1] = vector.y;
 		mat[3][2] = vector.z;
+	}
+
+	void setScale(const Vector3& scale) {
+		setIdentity();
+		mat[0][0] = scale.x;
+		mat[1][1] = scale.y;
+		mat[2][2] = scale.z;
 	}
 
 	void setOrthoPM(float width, float height, float nearPlane, float farPlane) {

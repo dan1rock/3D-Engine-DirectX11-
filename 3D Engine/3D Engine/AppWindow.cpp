@@ -33,10 +33,14 @@ void AppWindow::updatePosition()
 	data.time = ::GetTickCount64();
 
 	deltaPos += deltaTime * 1.0f;
-	if (deltaPos > 1.0f) deltaPos = 0.0f;
 
-	data.world.setTranslation(Vector3::lerp(Vector3(-1, -1, 0), Vector3(1, 1, 0), deltaPos));
+	Matrix trans;
 
+	trans.setTranslation(Vector3::lerp(Vector3(-1, -1, 0), Vector3(1, 1, 0), (cos(deltaPos) + 1.0f) / 2.0f));
+	data.world.setScale(Vector3::lerp(Vector3(0.5f, 0.5f, 0), Vector3(1, 1, 0), (sin(deltaPos) + 1.0f) / 2.0f));
+
+	data.world *= trans;
+	
 	data.view.setIdentity();
 	RECT rc = this->getClientWindowRect();
 	data.projection.setOrthoPM(
@@ -63,10 +67,10 @@ void AppWindow::onCreate()
 
 	vertex vertexList[] = {
 		{Vector3(-0.5f, -0.5f, 0.0f),	Vector3(1, 1, 0)},
-		{Vector3(-0.5f, 0.5f, 0.0f)	,	Vector3(1, 1, 0)},
-		{Vector3(0.5f, -0.5f, 0.0f)	,	Vector3(1, 1, 0)},
-		{Vector3(0.7f, 0.3f, 0.0f)	,	Vector3(1, 1, 0)},
-		{Vector3(0.9f, -0.2f, 0.0f)	,	Vector3(1, 1, 0)}
+		{Vector3(-0.5f, 0.5f, 0.0f)	,	Vector3(1, 0, 1)},
+		{Vector3(0.5f, -0.5f, 0.0f)	,	Vector3(0, 1, 1)},
+		{Vector3(0.7f, 0.3f, 0.0f)	,	Vector3(1, 1, 1)},
+		{Vector3(0.9f, -0.2f, 0.0f)	,	Vector3(0, 1, 0)}
 	};
 
 	mVertexBuffer = GraphicsEngine::engine()->createVertexBuffer();

@@ -77,16 +77,68 @@ void AppWindow::onCreate()
 	RECT windowSize = this->getClientWindowRect();
 	mSwapChain->init(this->mHwnd, windowSize.right - windowSize.left, windowSize.bottom - windowSize.top);
 
+	/*
+	vertex vertexList[] = {
+		{Vector3(-0.5f, -0.5f, -0.5f)	,	Vector3(1, 1, 0)},// 0
+		{Vector3(-0.5f, 0.5f, -0.5f)	,	Vector3(1, 0, 1)},// 1
+		{Vector3(0.5f, 0.5f, -0.5f)		,	Vector3(0, 1, 1)},// 2
+		{Vector3(0.5f, -0.5f, -0.5f)	,	Vector3(1, 1, 1)},// 3
+		////
+		{Vector3(0.5f, -0.5f, 0.5f)		,	Vector3(0, 1, 0)},// 4
+		{Vector3(0.5f, 0.5f, 0.5f)		,	Vector3(0, 1, 1)},// 5
+		{Vector3(-0.5f, 0.5f, 0.5f)		,	Vector3(1, 1, 1)},// 6
+		{Vector3(-0.5f, -0.5f, 0.5f)	,	Vector3(0, 1, 0)} // 7
+	};
+	*/
+
 	vertex vertexList[] = {
 		{Vector3(-0.5f, -0.5f, -0.5f)	,	Vector3(1, 1, 0)},
-		{Vector3(-0.5f, 0.5f, -0.5f)	,	Vector3(1, 0, 1)},
-		{Vector3(0.5f, 0.5f, -0.5f)		,	Vector3(0, 1, 1)},
-		{Vector3(0.5f, -0.5f, -0.5f)	,	Vector3(1, 1, 1)},
-		////
-		{Vector3(0.5f, -0.5f, 0.5f)		,	Vector3(0, 1, 0)},
-		{Vector3(0.5f, 0.5f, 0.5f)		,	Vector3(0, 1, 1)},
-		{Vector3(-0.5f, 0.5f, 0.5f)		,	Vector3(1, 1, 1)},
-		{Vector3(-0.5f, -0.5f, 0.5f)	,	Vector3(0, 1, 0)}
+		{Vector3(-0.5f, 0.5f, -0.5f)	,	Vector3(1, 1, 0)},
+		{Vector3(0.5f, 0.5f, -0.5f)		,	Vector3(1, 1, 0)},
+
+		{Vector3(0.5f, 0.5f, -0.5f)		,	Vector3(1, 1, 0)},
+		{Vector3(0.5f, -0.5f, -0.5f)	,	Vector3(1, 1, 0)},
+		{Vector3(-0.5f, -0.5f, -0.5f)	,	Vector3(1, 1, 0)},
+
+		{Vector3(0.5f, -0.5f, 0.5f)		,	Vector3(0.5f, 0.5f, 0)},
+		{Vector3(0.5f, 0.5f, 0.5f)		,	Vector3(0.5f, 0.5f, 0)},
+		{Vector3(-0.5f, 0.5f, 0.5f)		,	Vector3(0.5f, 0.5f, 0)},
+
+		{Vector3(-0.5f, 0.5f, 0.5f)		,	Vector3(0.5f, 0.5f, 0)},// 6
+		{Vector3(-0.5f, -0.5f, 0.5f)	,	Vector3(0.5f, 0.5f, 0)},// 7
+		{Vector3(0.5f, -0.5f, 0.5f)		,	Vector3(0.5f, 0.5f, 0)},// 4
+
+		{Vector3(-0.5f, 0.5f, -0.5f)	,	Vector3(0.7f, 0.7f, 0)},// 1
+		{Vector3(-0.5f, 0.5f, 0.5f)		,	Vector3(0.7f, 0.7f, 0)},// 6
+		{Vector3(0.5f, 0.5f, 0.5f)		,	Vector3(0.7f, 0.7f, 0)},// 5
+
+		{Vector3(0.5f, 0.5f, 0.5f)		,	Vector3(0.7f, 0.7f, 0)},// 5
+		{Vector3(0.5f, 0.5f, -0.5f)		,	Vector3(0.7f, 0.7f, 0)},// 2
+		{Vector3(-0.5f, 0.5f, -0.5f)	,	Vector3(0.7f, 0.7f, 0)},// 1
+
+		{Vector3(-0.5f, -0.5f, 0.5f)	,	Vector3(0.9f, 0.9f, 0)},// 7
+		{Vector3(-0.5f, -0.5f, -0.5f)	,	Vector3(0.9f, 0.9f, 0)},// 0
+		{Vector3(0.5f, -0.5f, -0.5f)	,	Vector3(0.9f, 0.9f, 0)},// 3
+
+		{Vector3(0.5f, -0.5f, -0.5f)	,	Vector3(0.9f, 0.9f, 0)},// 3
+		{Vector3(0.5f, -0.5f, 0.5f)		,	Vector3(0.9f, 0.9f, 0)},// 4
+		{Vector3(-0.5f, -0.5f, 0.5f)	,	Vector3(0.9f, 0.9f, 0)},// 7
+
+		{Vector3(0.5f, -0.5f, -0.5f)	,	Vector3(0.3f, 0.3f, 0)},// 3
+		{Vector3(0.5f, 0.5f, -0.5f)		,	Vector3(0.3f, 0.3f, 0)},// 2
+		{Vector3(0.5f, 0.5f, 0.5f)		,	Vector3(0.3f, 0.3f, 0)},// 5
+
+		{Vector3(0.5f, 0.5f, 0.5f)		,	Vector3(0.3f, 0.3f, 0)},// 5
+		{Vector3(0.5f, -0.5f, 0.5f)		,	Vector3(0.3f, 0.3f, 0)},// 4
+		{Vector3(0.5f, -0.5f, -0.5f)	,	Vector3(0.3f, 0.3f, 0)},// 3
+
+		{Vector3(-0.5f, -0.5f, 0.5f)	,	Vector3(0.8f, 0.8f, 0)},// 7
+		{Vector3(-0.5f, 0.5f, 0.5f)		,	Vector3(0.8f, 0.8f, 0)},// 6
+		{Vector3(-0.5f, 0.5f, -0.5f)	,	Vector3(0.8f, 0.8f, 0)},// 1
+
+		{Vector3(-0.5f, 0.5f, -0.5f)	,	Vector3(0.8f, 0.8f, 0)},// 1
+		{Vector3(-0.5f, -0.5f, -0.5f)	,	Vector3(0.8f, 0.8f, 0)},// 0
+		{Vector3(-0.5f, -0.5f, 0.5f)	,	Vector3(0.8f, 0.8f, 0)} // 7
 	};
 
 	unsigned int indexList[] = {
@@ -146,8 +198,9 @@ void AppWindow::onUpdate()
 	GraphicsEngine::engine()->getImmDeviceContext()->setPixelShader(mPixelShader);
 	GraphicsEngine::engine()->getImmDeviceContext()->setVertexBuffer(mVertexBuffer);
 	GraphicsEngine::engine()->getImmDeviceContext()->setIndexBuffer(mIndexBuffer);
-	GraphicsEngine::engine()->getImmDeviceContext()->drawIndexedTriangleList(mIndexBuffer->getVertexListSize(), 0, 0);
+	//GraphicsEngine::engine()->getImmDeviceContext()->drawIndexedTriangleList(mIndexBuffer->getVertexListSize(), 0, 0);
 	//GraphicsEngine::engine()->getImmDeviceContext()->drawTriangleStrip(mVertexBuffer->getVertexListSize(), 0);
+	GraphicsEngine::engine()->getImmDeviceContext()->drawTriangleList(mVertexBuffer->getVertexListSize(), 0);
 	mSwapChain->present(false);
 
 	updateDeltaTime();

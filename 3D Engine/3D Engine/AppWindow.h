@@ -33,6 +33,8 @@ private:
 	float currentTickTime = 0;
 	float deltaTime = 0;
 
-	float deltaPos = 0;
+	float rotX = 0;
+	float rotY = 0;
+	float rotZ = 0;
 };
 

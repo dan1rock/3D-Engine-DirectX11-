@@ -32,7 +32,31 @@ void AppWindow::updatePosition()
 	constant data = {};
 	data.time = ::GetTickCount64();
 
-	deltaPos += deltaTime / 50.0f;
+	const float speed = 2.0f;
+	if (GetKeyState('W') & 0x8000)
+	{
+		rotX -= deltaTime * speed;
+	}
+	if (GetKeyState('S') & 0x8000)
+	{
+		rotX += deltaTime * speed;
+	}
+	if (GetKeyState('A') & 0x8000)
+	{
+		rotY -= deltaTime * speed;
+	}
+	if (GetKeyState('D') & 0x8000)
+	{
+		rotY += deltaTime * speed;
+	}
+	if (GetKeyState('Q') & 0x8000)
+	{
+		rotZ -= deltaTime * speed;
+	}
+	if (GetKeyState('E') & 0x8000)
+	{
+		rotZ += deltaTime * speed;
+	}
 
 	Matrix trans;
 
@@ -42,15 +66,15 @@ void AppWindow::updatePosition()
 	data.world.setScale(Vector3(1, 1, 1));
 
 	trans.setIdentity();
-	trans.setRotationX(sin(deltaPos) * 90.0f);
+	trans.setRotationX(rotX);
 	data.world *= trans;
 
 	trans.setIdentity();
-	trans.setRotationY(cos(deltaPos) * 90.0f);
+	trans.setRotationY(rotY);
 	data.world *= trans;
 
 	trans.setIdentity();
-	trans.setRotationZ(30.0f);
+	trans.setRotationZ(rotZ);
 	data.world *= trans;
 	
 	data.view.setIdentity();
@@ -205,7 +229,7 @@ void AppWindow::onCreate()
 
 void AppWindow::onUpdate()
 {
-	GraphicsEngine::engine()->getImmDeviceContext()->clearRenderTarget(mSwapChain, 0, 0.3f, 0.4f, 1);
+	GraphicsEngine::engine()->getImmDeviceContext()->clearRenderTarget(mSwapChain, 0.7f, 0.7f, 0.7f, 1);
 	RECT windowSize = this->getClientWindowRect();
 	GraphicsEngine::engine()->getImmDeviceContext()->setViewportSize(windowSize.right - windowSize.left, windowSize.bottom - windowSize.top);
 

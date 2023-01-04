@@ -115,7 +115,6 @@ void AppWindow::onCreate()
 	};
 	*/
 
-	/*
 	vertex vertexList[] = {
 		{Vector3(-0.5f, -0.5f, -0.5f)	,	Vector3(1, 1, 0)},// 0
 		{Vector3(-0.5f, 0.5f, -0.5f)	,	Vector3(1, 1, 0)},// 1
@@ -165,8 +164,8 @@ void AppWindow::onCreate()
 		{Vector3(-0.5f, -0.5f, -0.5f)	,	Vector3(0.8f, 0.8f, 0)},// 0
 		{Vector3(-0.5f, -0.5f, 0.5f)	,	Vector3(0.8f, 0.8f, 0)} // 7
 	};
-	*/
 
+	/*
 	vertex vertexList[] = {
 		{Vector3(-0.5f, 0.5f, -0.5f)	,	Vector3(1, 1, 0)},// 1
 		{Vector3(-0.5f, -0.5f, -0.5f)	,	Vector3(1, 1, 0)},// 0
@@ -184,6 +183,7 @@ void AppWindow::onCreate()
 		{Vector3(-0.5f, 0.5f, -0.5f)	,	Vector3(0.8f, 0.8f, 0)},// 1
 		{Vector3(0.0f, 0.0f, 0.5f)		,	Vector3(0.8f, 0.8f, 0)},// 3
 	};
+	*/
 
 	unsigned int indexList[] = {
 		0,1,2,

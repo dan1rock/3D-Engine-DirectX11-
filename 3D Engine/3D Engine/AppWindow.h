@@ -38,4 +38,3 @@ private:
 	float rotY = 0;
 	float rotZ = 0;
 };
-

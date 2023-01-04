@@ -22,4 +22,3 @@ protected:
 	HWND mHwnd = NULL;
 	bool mIsRunning = false;
 };
-

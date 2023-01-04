@@ -18,4 +18,3 @@ private:
 	friend class GraphicsEngine;
 	friend class DeviceContext;
 };
-

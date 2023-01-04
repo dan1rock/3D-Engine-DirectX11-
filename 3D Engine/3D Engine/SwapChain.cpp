@@ -1,9 +1,5 @@
 #include "SwapChain.h"
 #include "GraphicsEngine.h"
-#include <iostream>
-#include <system_error>
-
-using namespace std;
 
 SwapChain::SwapChain()
 {
@@ -33,11 +29,8 @@ bool SwapChain::init(HWND hwnd, UINT width, UINT height)
 	
 
 	HRESULT hr = GraphicsEngine::engine()->mDxgiFactory->CreateSwapChain(device, &desc, &mSwapChain);
-	if (FAILED(hr)) {
-		std::string message = std::system_category().message(hr);
-		cout << message;
+	if (FAILED(hr))
 		return false;
-	}
 
 	ID3D11Texture2D* buffer;
 	hr = mSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&buffer);

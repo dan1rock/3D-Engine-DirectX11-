@@ -223,17 +223,16 @@ void AppWindow::onCreate()
 	GraphicsEngine::engine()->releasePixelShader();
 
 	constant data = {};
-	data.time = 0;
 	mConstantBuffer->load(&data, sizeof(data));
 }
 
 void AppWindow::onUpdate()
 {
-	GraphicsEngine::engine()->getImmDeviceContext()->clearRenderTarget(mSwapChain, 0.7f, 0.7f, 0.7f, 1);
+	GraphicsEngine::engine()->getImmDeviceContext()->clearRenderTarget(mSwapChain, 0.3f, 0.3f, 0.6f, 1);
 	RECT windowSize = this->getClientWindowRect();
 	GraphicsEngine::engine()->getImmDeviceContext()->setViewportSize(windowSize.right - windowSize.left, windowSize.bottom - windowSize.top);
 
-	this->updatePosition();
+	updatePosition();
 
 	GraphicsEngine::engine()->getImmDeviceContext()->setConstantBuffer(mVertexShader, mConstantBuffer);
 	GraphicsEngine::engine()->getImmDeviceContext()->setConstantBuffer(mPixelShader, mConstantBuffer);

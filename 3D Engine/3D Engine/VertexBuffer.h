@@ -7,7 +7,7 @@ class VertexBuffer
 {
 public:
 	VertexBuffer();
-	bool load(void* vertList, UINT vertSize, UINT listSize, void* shaderByteCode, UINT byteShaderSize);
+	bool load(void* vertList, UINT vertSize, UINT listSize, void* shaderByteCode, SIZE_T byteShaderSize);
 	UINT getVertexListSize();
 	bool release();
 	~VertexBuffer();

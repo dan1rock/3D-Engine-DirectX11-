@@ -1,9 +1,5 @@
 #include "IndexBuffer.h"
 #include "GraphicsEngine.h"
-#include <iostream>
-#include <system_error>
-
-using namespace std;
 
 IndexBuffer::IndexBuffer()
 {

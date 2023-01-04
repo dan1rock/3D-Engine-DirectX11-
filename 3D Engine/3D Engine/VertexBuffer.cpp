@@ -1,15 +1,11 @@
 #include "VertexBuffer.h"
 #include "GraphicsEngine.h"
-#include <iostream>
-#include <system_error>
-
-using namespace std;
 
 VertexBuffer::VertexBuffer()
 {
 }
 
-bool VertexBuffer::load(void* vertList, UINT vertSize, UINT listSize, void* shaderByteCode, UINT byteShaderSize)
+bool VertexBuffer::load(void* vertList, UINT vertSize, UINT listSize, void* shaderByteCode, SIZE_T byteShaderSize)
 {
 	if (mBuffer) mBuffer->Release();
 	if (mInputLayout) mInputLayout->Release();
@@ -29,11 +25,8 @@ bool VertexBuffer::load(void* vertList, UINT vertSize, UINT listSize, void* shad
 
 	HRESULT hr;
 	hr = GraphicsEngine::engine()->mD3dDevice->CreateBuffer(&bufferDesc, &subresData, &mBuffer);
-	if (FAILED(hr)) {
-		std::string message = std::system_category().message(hr);
-		cout << message;
+	if (FAILED(hr))
 		return false;
-	}
 
 	D3D11_INPUT_ELEMENT_DESC inputElementDesc[] = {
 		//SEMANTIC NAME - SEMANTIC INDEX - FORMAT - INPUT SLOT - ALIGNED BYTE OFFSET - INPUT SLOT CLASS - INSTANCE DATA STEP RATE
@@ -43,11 +36,8 @@ bool VertexBuffer::load(void* vertList, UINT vertSize, UINT listSize, void* shad
 	UINT inputElementDescSize = ARRAYSIZE(inputElementDesc);
 
 	hr = GraphicsEngine::engine()->mD3dDevice->CreateInputLayout(inputElementDesc, inputElementDescSize, shaderByteCode, byteShaderSize, &mInputLayout);
-	if (FAILED(hr)) {
-		std::string message = std::system_category().message(hr);
-		cout << message;
+	if (FAILED(hr))
 		return false;
-	}
 
 	return true;
 }

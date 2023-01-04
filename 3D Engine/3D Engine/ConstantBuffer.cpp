@@ -1,7 +1,6 @@
 #include "ConstantBuffer.h"
 #include "GraphicsEngine.h"
 #include "DeviceContext.h"
-#include <iostream>
 
 ConstantBuffer::ConstantBuffer()
 {
@@ -23,10 +22,8 @@ bool ConstantBuffer::load(void* buffer, UINT bufferSize)
 
 	HRESULT hr;
 	hr = GraphicsEngine::engine()->mD3dDevice->CreateBuffer(&bufferDesc, &subresData, &mBuffer);
-	if (FAILED(hr)) {
-		std::cout << "FAILED";
+	if (FAILED(hr))
 		return false;
-	}
 
 	return true;
 }

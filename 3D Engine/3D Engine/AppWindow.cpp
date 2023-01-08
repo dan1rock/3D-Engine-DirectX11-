@@ -45,13 +45,29 @@ void AppWindow::updatePosition()
 
 	const float speed = 2.0f;
 	const float mouseSpeed = 0.01f;
+	const float scaleSpeed = 1.0f;
 
 	if (isFocused)
 	{
 		rotX += deltaMousePos.y * mouseSpeed;
 		rotY -= deltaMousePos.x * mouseSpeed;
 	}
-
+	if (GetKeyState(VK_LBUTTON) & 0x8000) 
+	{
+		scale = Vector3(
+			scale.x + deltaTime * scaleSpeed,
+			scale.y + deltaTime * scaleSpeed,
+			scale.z + deltaTime * scaleSpeed
+		);
+	}
+	if (GetKeyState(VK_RBUTTON) & 0x8000)
+	{
+		scale = Vector3(
+			scale.x - deltaTime * scaleSpeed,
+			scale.y - deltaTime * scaleSpeed,
+			scale.z - deltaTime * scaleSpeed
+		);
+	}
 	if (GetKeyState('W') & 0x8000)
 	{
 		rotX -= deltaTime * speed;
@@ -81,7 +97,7 @@ void AppWindow::updatePosition()
 
 	//trans.setTranslation(Vector3::lerp(Vector3(-1, -1, 0), Vector3(1, 1, 0), (cos(deltaPos) + 1.0f) / 2.0f));
 	//trans.setTranslation(Vector3(0, 0, 0));
-	data.world.setScale(Vector3(1, 1, 1));
+	data.world.setScale(scale);
 
 	trans.setIdentity();
 	trans.setRotationX(rotX);

@@ -9,6 +9,7 @@
 #include "VertexShader.h"
 #include "PixelShader.h"
 #include "Vector2.h"
+#include "Vector3.h"
 
 
 class AppWindow: public Window
@@ -42,6 +43,7 @@ private:
 	Vector2 currentTickMousePos = {};
 	Vector2 deltaMousePos = {};
 
+	Vector3 scale = Vector3(1, 1, 1);
 	float rotX = 0;
 	float rotY = 0;
 	float rotZ = 0;

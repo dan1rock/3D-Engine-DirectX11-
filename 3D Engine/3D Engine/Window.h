@@ -15,6 +15,8 @@ public:
 
 	virtual void onCreate() = 0;
 	virtual void onUpdate() = 0;
+	virtual void onFocus();
+	virtual void onKillFocus();
 	virtual void onDestroy();
 
 	~Window();

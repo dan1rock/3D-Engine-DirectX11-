@@ -24,5 +24,10 @@ public:
 		return res;
 	}
 
+	~Vector3() 
+	{
+	
+	}
+
 	float x, y, z;
 };

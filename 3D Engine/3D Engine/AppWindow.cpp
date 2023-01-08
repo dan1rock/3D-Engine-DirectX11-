@@ -27,12 +27,31 @@ void AppWindow::updateDeltaTime()
 	deltaTime = (lastTickTime > 0) ? ((currentTickTime - lastTickTime) / 1000.0f) : 0;
 }
 
+void AppWindow::updateDeltaMousePos()
+{
+	POINT currentMousePos = {};
+	::GetCursorPos(&currentMousePos);
+	deltaMousePos = Vector2(
+		currentMousePos.x - lastTickMousePos.x,
+		currentMousePos.y - lastTickMousePos.y
+	);
+	lastTickMousePos = Vector2(currentMousePos.x, currentMousePos.y);
+}
+
 void AppWindow::updatePosition()
 {
 	constant data = {};
 	data.time = ::GetTickCount64();
 
 	const float speed = 2.0f;
+	const float mouseSpeed = 0.01f;
+
+	if (isFocused)
+	{
+		rotX += deltaMousePos.y * mouseSpeed;
+		rotY -= deltaMousePos.x * mouseSpeed;
+	}
+
 	if (GetKeyState('W') & 0x8000)
 	{
 		rotX -= deltaTime * speed;
@@ -61,7 +80,6 @@ void AppWindow::updatePosition()
 	Matrix trans;
 
 	//trans.setTranslation(Vector3::lerp(Vector3(-1, -1, 0), Vector3(1, 1, 0), (cos(deltaPos) + 1.0f) / 2.0f));
-	//data.world.setScale(Vector3::lerp(Vector3(0.5f, 0.5f, 0), Vector3(1, 1, 0), (sin(deltaPos) + 1.0f) / 2.0f));
 	//trans.setTranslation(Vector3(0, 0, 0));
 	data.world.setScale(Vector3(1, 1, 1));
 
@@ -101,7 +119,10 @@ void AppWindow::onCreate()
 	RECT windowSize = this->getClientWindowRect();
 	mSwapChain->init(this->mHwnd, windowSize.right - windowSize.left, windowSize.bottom - windowSize.top);
 
-	/*
+	POINT currentMousePos = {};
+	::GetCursorPos(&currentMousePos);
+	lastTickMousePos = Vector2(currentMousePos.x, currentMousePos.y);
+
 	vertex vertexList[] = {
 		{Vector3(-0.5f, -0.5f, -0.5f)	,	Vector3(1, 1, 0)},// 0
 		{Vector3(-0.5f, 0.5f, -0.5f)	,	Vector3(1, 0, 1)},// 1
@@ -111,18 +132,18 @@ void AppWindow::onCreate()
 		{Vector3(0.5f, -0.5f, 0.5f)		,	Vector3(0, 1, 0)},// 4
 		{Vector3(0.5f, 0.5f, 0.5f)		,	Vector3(0, 1, 1)},// 5
 		{Vector3(-0.5f, 0.5f, 0.5f)		,	Vector3(1, 1, 1)},// 6
-		{Vector3(-0.5f, -0.5f, 0.5f)	,	Vector3(0, 1, 0)} // 7
+		{Vector3(-0.5f, -0.5f, 0.5f)	,	Vector3(0.5f, 0.5f, 1)} // 7
 	};
-	*/
 
+	/*
 	vertex vertexList[] = {
-		{Vector3(-0.5f, -0.5f, -0.5f)	,	Vector3(1, 1, 0)},// 0
-		{Vector3(-0.5f, 0.5f, -0.5f)	,	Vector3(1, 1, 0)},// 1
-		{Vector3(0.5f, 0.5f, -0.5f)		,	Vector3(1, 1, 0)},// 2
+		{Vector3(-0.5f, -0.5f, -0.5f)	,	Vector3(0.85f, 0.85f, 0)},// 0
+		{Vector3(-0.5f, 0.5f, -0.5f)	,	Vector3(0.85f, 0.85f, 0)},// 1
+		{Vector3(0.5f, 0.5f, -0.5f)		,	Vector3(0.85f, 0.85f, 0)},// 2
 
-		{Vector3(0.5f, 0.5f, -0.5f)		,	Vector3(1, 1, 0)},// 2
-		{Vector3(0.5f, -0.5f, -0.5f)	,	Vector3(1, 1, 0)},// 3
-		{Vector3(-0.5f, -0.5f, -0.5f)	,	Vector3(1, 1, 0)},// 0
+		{Vector3(0.5f, 0.5f, -0.5f)		,	Vector3(0.85f, 0.85f, 0)},// 2
+		{Vector3(0.5f, -0.5f, -0.5f)	,	Vector3(0.85f, 0.85f, 0)},// 3
+		{Vector3(-0.5f, -0.5f, -0.5f)	,	Vector3(0.85f, 0.85f, 0)},// 0
 
 		{Vector3(0.5f, -0.5f, 0.5f)		,	Vector3(0.5f, 0.5f, 0)},// 4
 		{Vector3(0.5f, 0.5f, 0.5f)		,	Vector3(0.5f, 0.5f, 0)},// 5
@@ -164,6 +185,7 @@ void AppWindow::onCreate()
 		{Vector3(-0.5f, -0.5f, -0.5f)	,	Vector3(0.8f, 0.8f, 0)},// 0
 		{Vector3(-0.5f, -0.5f, 0.5f)	,	Vector3(0.8f, 0.8f, 0)} // 7
 	};
+	*/
 
 	/*
 	vertex vertexList[] = {
@@ -232,6 +254,8 @@ void AppWindow::onUpdate()
 	RECT windowSize = this->getClientWindowRect();
 	GraphicsEngine::engine()->getImmDeviceContext()->setViewportSize(windowSize.right - windowSize.left, windowSize.bottom - windowSize.top);
 
+	updateDeltaTime();
+	updateDeltaMousePos();
 	updatePosition();
 
 	GraphicsEngine::engine()->getImmDeviceContext()->setConstantBuffer(mVertexShader, mConstantBuffer);
@@ -241,12 +265,20 @@ void AppWindow::onUpdate()
 	GraphicsEngine::engine()->getImmDeviceContext()->setPixelShader(mPixelShader);
 	GraphicsEngine::engine()->getImmDeviceContext()->setVertexBuffer(mVertexBuffer);
 	GraphicsEngine::engine()->getImmDeviceContext()->setIndexBuffer(mIndexBuffer);
-	//GraphicsEngine::engine()->getImmDeviceContext()->drawIndexedTriangleList(mIndexBuffer->getVertexListSize(), 0, 0);
+	GraphicsEngine::engine()->getImmDeviceContext()->drawIndexedTriangleList(mIndexBuffer->getVertexListSize(), 0, 0);
 	//GraphicsEngine::engine()->getImmDeviceContext()->drawTriangleStrip(mVertexBuffer->getVertexListSize(), 0);
-	GraphicsEngine::engine()->getImmDeviceContext()->drawTriangleList(mVertexBuffer->getVertexListSize(), 0);
+	//GraphicsEngine::engine()->getImmDeviceContext()->drawTriangleList(mVertexBuffer->getVertexListSize(), 0);
 	mSwapChain->present(false);
+}
 
-	updateDeltaTime();
+void AppWindow::onFocus()
+{
+	isFocused = true;
+}
+
+void AppWindow::onKillFocus()
+{
+	isFocused = false;
 }
 
 void AppWindow::onDestroy()

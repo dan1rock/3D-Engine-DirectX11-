@@ -8,6 +8,7 @@
 #include "ConstantBuffer.h"
 #include "VertexShader.h"
 #include "PixelShader.h"
+#include "Vector2.h"
 
 
 class AppWindow: public Window
@@ -15,12 +16,15 @@ class AppWindow: public Window
 public:
 	AppWindow();
 	void updateDeltaTime();
+	void updateDeltaMousePos();
 	void updatePosition();
 	~AppWindow();
 
 	// Inherited via Window
 	virtual void onCreate() override;
 	virtual void onUpdate() override;
+	virtual void onFocus() override;
+	virtual void onKillFocus() override;
 	virtual void onDestroy() override;
 private:
 	SwapChain* mSwapChain = nullptr;
@@ -34,7 +38,13 @@ private:
 	float currentTickTime = 0;
 	float deltaTime = 0;
 
+	Vector2 lastTickMousePos = {};
+	Vector2 currentTickMousePos = {};
+	Vector2 deltaMousePos = {};
+
 	float rotX = 0;
 	float rotY = 0;
 	float rotZ = 0;
+
+	bool isFocused = false;
 };

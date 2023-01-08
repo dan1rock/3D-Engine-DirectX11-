@@ -89,6 +89,9 @@
     <ClInclude Include="IndexBuffer.h">
       <Filter>Engine\Header</Filter>
     </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="VertexShader.hlsl">

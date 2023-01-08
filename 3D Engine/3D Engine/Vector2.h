@@ -13,5 +13,10 @@ public:
 	
 	}
 
+	Vector2(const Vector2& vector) : x(vector.x), y(vector.y)
+	{
+
+	}
+
 	float x, y;
 };

@@ -10,6 +10,7 @@
 #include "PixelShader.h"
 #include "Vector2.h"
 #include "Vector3.h"
+#include "Matrix.h"
 
 
 class AppWindow: public Window
@@ -47,6 +48,8 @@ private:
 	float rotX = 0;
 	float rotY = 0;
 	float rotZ = 0;
+
+	Matrix worldCam;
 
 	bool isFocused = false;
 };

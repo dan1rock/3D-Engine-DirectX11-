@@ -1,6 +1,4 @@
 #include "AppWindow.h"
-#include "Vector3.h"
-#include "Matrix.h"
 #include <Windows.h>
 
 struct vertex {
@@ -44,80 +42,107 @@ void AppWindow::updatePosition()
 	data.time = ::GetTickCount64();
 
 	const float speed = 2.0f;
-	const float mouseSpeed = 0.01f;
+	const float mouseSpeed = 0.002f;
 	const float scaleSpeed = 1.0f;
 
 	if (isFocused)
 	{
 		rotX += deltaMousePos.y * mouseSpeed;
-		rotY -= deltaMousePos.x * mouseSpeed;
+		rotY += deltaMousePos.x * mouseSpeed;
+
+		if (GetKeyState(VK_LBUTTON) & 0x8000)
+		{
+			scale = Vector3(
+				scale.x + deltaTime * scaleSpeed,
+				scale.y + deltaTime * scaleSpeed,
+				scale.z + deltaTime * scaleSpeed
+			);
+		}
+		if (GetKeyState(VK_RBUTTON) & 0x8000)
+		{
+			scale = Vector3(
+				scale.x - deltaTime * scaleSpeed,
+				scale.y - deltaTime * scaleSpeed,
+				scale.z - deltaTime * scaleSpeed
+			);
+		}
 	}
-	if (GetKeyState(VK_LBUTTON) & 0x8000) 
-	{
-		scale = Vector3(
-			scale.x + deltaTime * scaleSpeed,
-			scale.y + deltaTime * scaleSpeed,
-			scale.z + deltaTime * scaleSpeed
-		);
-	}
-	if (GetKeyState(VK_RBUTTON) & 0x8000)
-	{
-		scale = Vector3(
-			scale.x - deltaTime * scaleSpeed,
-			scale.y - deltaTime * scaleSpeed,
-			scale.z - deltaTime * scaleSpeed
-		);
-	}
+
+	Vector2 direction = Vector2(0, 0);
+
 	if (GetKeyState('W') & 0x8000)
 	{
-		rotX -= deltaTime * speed;
+		direction.x = 1.0f;
 	}
 	if (GetKeyState('S') & 0x8000)
 	{
-		rotX += deltaTime * speed;
+		direction.x = -1.0f;
 	}
 	if (GetKeyState('A') & 0x8000)
 	{
-		rotY -= deltaTime * speed;
+		direction.y = 1.0f;
 	}
 	if (GetKeyState('D') & 0x8000)
 	{
-		rotY += deltaTime * speed;
-	}
-	if (GetKeyState('Q') & 0x8000)
-	{
-		rotZ -= deltaTime * speed;
-	}
-	if (GetKeyState('E') & 0x8000)
-	{
-		rotZ += deltaTime * speed;
+		direction.y = -1.0f;
 	}
 
-	Matrix trans;
+	Matrix temp;
+	Matrix cam;
 
 	//trans.setTranslation(Vector3::lerp(Vector3(-1, -1, 0), Vector3(1, 1, 0), (cos(deltaPos) + 1.0f) / 2.0f));
 	//trans.setTranslation(Vector3(0, 0, 0));
+	/*
 	data.world.setScale(scale);
 
-	trans.setIdentity();
-	trans.setRotationX(rotX);
-	data.world *= trans;
+	temp.setIdentity();
+	temp.setRotationX(rotX);
+	data.world *= temp;
 
-	trans.setIdentity();
-	trans.setRotationY(rotY);
-	data.world *= trans;
+	temp.setIdentity();
+	temp.setRotationY(rotY);
+	data.world *= temp;
 
-	trans.setIdentity();
-	trans.setRotationZ(rotZ);
-	data.world *= trans;
+	temp.setIdentity();
+	temp.setRotationZ(rotZ);
+	data.world *= temp;
+	*/
+
+	data.world.setIdentity();
+	cam.setIdentity();
+
+	temp.setIdentity();
+	temp.setRotationX(rotX);
+	cam *= temp;
+
+	temp.setIdentity();
+	temp.setRotationY(rotY);
+	cam *= temp;
+
+	Vector3 newPos = worldCam.getTranslation() + cam.getZDirection() * direction.x;
+	cam.setTranslation(newPos);
+
+	worldCam = cam;
+	worldCam.inverse();
 	
-	data.view.setIdentity();
+	data.view = worldCam;
 	RECT rc = this->getClientWindowRect();
+
+	/*
 	data.projection.setOrthoPM(
 		(rc.right - rc.left) / 300.0f,
 		(rc.bottom - rc.top) / 300.0f,
 		-4.0f,
 		4.0f
+	);
+	*/
+
+	float aspectRatio = (float)(rc.right - rc.left) / (float)(rc.bottom - rc.top);
+	data.projection.setPerspectivePM(
+		1.57f,
+		aspectRatio,
+		0.1f,
+		100.0f
 	);
 
 	mConstantBuffer->update(GraphicsEngine::engine()->getImmDeviceContext(), &data);
@@ -138,6 +163,8 @@ void AppWindow::onCreate()
 	POINT currentMousePos = {};
 	::GetCursorPos(&currentMousePos);
 	lastTickMousePos = Vector2(currentMousePos.x, currentMousePos.y);
+
+	worldCam.setTranslation(Vector3(0, 0, -2));
 
 	vertex vertexList[] = {
 		{Vector3(-0.5f, -0.5f, -0.5f)	,	Vector3(1, 1, 0)},// 0

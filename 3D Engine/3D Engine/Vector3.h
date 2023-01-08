@@ -16,6 +16,14 @@ public:
 
 	}
 
+	Vector3 operator *(float num) {
+		return Vector3(x * num, y * num, z * num);
+	}
+
+	Vector3 operator +(Vector3 vector) {
+		return Vector3(x + vector.x, y + vector.y, z + vector.z);
+	}
+
 	static Vector3 lerp(const Vector3& startPos, const Vector3 endPos, float delta) {
 		Vector3 res;
 		res.x = startPos.x * (1.0f - delta) + endPos.x * delta;

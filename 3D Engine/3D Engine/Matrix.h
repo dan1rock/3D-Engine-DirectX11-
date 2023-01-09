@@ -117,6 +117,10 @@ public:
 		return Vector3(mat[0][0], mat[0][1], mat[0][2]);
 	}
 
+	Vector3 getYDirection() {
+		return Vector3(mat[1][0], mat[1][1], mat[1][2]);
+	}
+
 	Vector3 getZDirection() {
 		return Vector3(mat[2][0], mat[2][1], mat[2][2]);
 	}

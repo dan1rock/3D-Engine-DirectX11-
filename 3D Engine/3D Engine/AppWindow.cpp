@@ -27,19 +27,27 @@ void AppWindow::updateDeltaTime()
 
 void AppWindow::updateDeltaMousePos()
 {
-	POINT currentMousePos = {};
-	::GetCursorPos(&currentMousePos);
-	deltaMousePos = Vector2(
-		currentMousePos.x - lastTickMousePos.x,
-		currentMousePos.y - lastTickMousePos.y
-	);
-	lastTickMousePos = Vector2(currentMousePos.x, currentMousePos.y);
+	if (isFocused)
+	{
+		RECT rc = this->getClientWindowRect();
+		POINT currentMousePos = {};
+		::GetCursorPos(&currentMousePos);
+		::SetCursorPos((rc.right - rc.left) / 2, (rc.bottom - rc.top) / 2);
+		deltaMousePos = Vector2(
+			currentMousePos.x - lastTickMousePos.x,
+			currentMousePos.y - lastTickMousePos.y
+		);
+		lastTickMousePos = Vector2((rc.right - rc.left) / 2, (rc.bottom - rc.top) / 2);
+	}
+	else deltaMousePos = Vector2(0.0f, 0.0f);
 }
 
 void AppWindow::updatePosition()
 {
 	constant data = {};
 	data.time = ::GetTickCount64();
+
+	RECT rc = this->getClientWindowRect();
 
 	const float speed = 2.0f;
 	const float mouseSpeed = 0.002f;
@@ -68,45 +76,35 @@ void AppWindow::updatePosition()
 		}
 	}
 
-	Vector2 direction = Vector2(0, 0);
+	Vector3 direction = Vector3(0, 0, 0);
 
 	if (GetKeyState('W') & 0x8000)
 	{
-		direction.x = 1.0f;
+		direction.x = speed;
 	}
 	if (GetKeyState('S') & 0x8000)
 	{
-		direction.x = -1.0f;
+		direction.x = -speed;
 	}
 	if (GetKeyState('A') & 0x8000)
 	{
-		direction.y = 1.0f;
+		direction.y = -speed;
 	}
 	if (GetKeyState('D') & 0x8000)
 	{
-		direction.y = -1.0f;
+		direction.y = speed;
+	}
+	if (GetKeyState(VK_SHIFT) & 0x8000)
+	{
+		direction.z = -speed;
+	}
+	if (GetKeyState(VK_SPACE) & 0x8000)
+	{
+		direction.z = speed;
 	}
 
 	Matrix temp;
 	Matrix cam;
-
-	//trans.setTranslation(Vector3::lerp(Vector3(-1, -1, 0), Vector3(1, 1, 0), (cos(deltaPos) + 1.0f) / 2.0f));
-	//trans.setTranslation(Vector3(0, 0, 0));
-	/*
-	data.world.setScale(scale);
-
-	temp.setIdentity();
-	temp.setRotationX(rotX);
-	data.world *= temp;
-
-	temp.setIdentity();
-	temp.setRotationY(rotY);
-	data.world *= temp;
-
-	temp.setIdentity();
-	temp.setRotationZ(rotZ);
-	data.world *= temp;
-	*/
 
 	data.world.setIdentity();
 	cam.setIdentity();
@@ -119,27 +117,20 @@ void AppWindow::updatePosition()
 	temp.setRotationY(rotY);
 	cam *= temp;
 
-	Vector3 newPos = worldCam.getTranslation() + cam.getZDirection() * direction.x;
+	Vector3 newPos = worldCam.getTranslation() + cam.getZDirection() * direction.x * deltaTime +
+		cam.getXDirection() * direction.y * deltaTime +
+		Vector3(0, direction.z * deltaTime, 0);
 	cam.setTranslation(newPos);
 
 	worldCam = cam;
-	worldCam.inverse();
-	
-	data.view = worldCam;
-	RECT rc = this->getClientWindowRect();
 
-	/*
-	data.projection.setOrthoPM(
-		(rc.right - rc.left) / 300.0f,
-		(rc.bottom - rc.top) / 300.0f,
-		-4.0f,
-		4.0f
-	);
-	*/
+	cam.inverse();
+	
+	data.view = cam;
 
 	float aspectRatio = (float)(rc.right - rc.left) / (float)(rc.bottom - rc.top);
 	data.projection.setPerspectivePM(
-		1.57f,
+		1.1f,
 		aspectRatio,
 		0.1f,
 		100.0f
@@ -317,11 +308,13 @@ void AppWindow::onUpdate()
 void AppWindow::onFocus()
 {
 	isFocused = true;
+	::ShowCursor(false);
 }
 
 void AppWindow::onKillFocus()
 {
 	isFocused = false;
+	::ShowCursor(true);
 }
 
 void AppWindow::onDestroy()

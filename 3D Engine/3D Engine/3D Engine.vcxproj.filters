@@ -7,14 +7,23 @@
     <Filter Include="Engine">
       <UniqueIdentifier>{5beb5d2a-2ebd-4ec8-a0b4-ebdef2914e0d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Header">
-      <UniqueIdentifier>{ffe86291-3149-43b4-a9bc-f12ff630457b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Source">
-      <UniqueIdentifier>{b6f99c78-495c-4d4c-93de-3e1e4f0f2331}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Math">
       <UniqueIdentifier>{393f5ef0-2c51-43b8-904a-c66563a9d831}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Shader managers">
+      <UniqueIdentifier>{8234e595-1252-4c98-b4d8-724735a5cc04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Buffer managers">
+      <UniqueIdentifier>{480a53a7-34fb-4653-a0a3-d9ecf37b9b8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Main parts">
+      <UniqueIdentifier>{03562819-9250-4477-b3fd-b1f769b73492}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Resource managers">
+      <UniqueIdentifier>{86d2f440-57b9-400f-95e1-51e775cfb365}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Shaders">
+      <UniqueIdentifier>{454f8ea8-1d07-46dd-beeb-b9ec478e41c9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -24,64 +33,43 @@
     <ClCompile Include="AppWindow.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="DeviceContext.cpp">
-      <Filter>Engine\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicsEngine.cpp">
-      <Filter>Engine\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="PixelShader.cpp">
-      <Filter>Engine\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="SwapChain.cpp">
-      <Filter>Engine\Source</Filter>
-    </ClCompile>
     <ClCompile Include="VertexBuffer.cpp">
-      <Filter>Engine\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="VertexShader.cpp">
-      <Filter>Engine\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Window.cpp">
-      <Filter>Engine\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="ConstantBuffer.cpp">
-      <Filter>Engine\Source</Filter>
+      <Filter>Engine\Buffer managers</Filter>
     </ClCompile>
     <ClCompile Include="IndexBuffer.cpp">
-      <Filter>Engine\Source</Filter>
+      <Filter>Engine\Buffer managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstantBuffer.cpp">
+      <Filter>Engine\Buffer managers</Filter>
+    </ClCompile>
+    <ClCompile Include="PixelShader.cpp">
+      <Filter>Engine\Shader managers</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexShader.cpp">
+      <Filter>Engine\Shader managers</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceContext.cpp">
+      <Filter>Engine\Main parts</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine.cpp">
+      <Filter>Engine\Main parts</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Engine\Main parts</Filter>
+    </ClCompile>
+    <ClCompile Include="SwapChain.cpp">
+      <Filter>Engine\Main parts</Filter>
     </ClCompile>
     <ClCompile Include="Resource.cpp">
-      <Filter>Engine\Source</Filter>
+      <Filter>Engine\Resource managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Engine\Resource managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
       <Filter>Main</Filter>
-    </ClInclude>
-    <ClInclude Include="VertexShader.h">
-      <Filter>Engine\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="DeviceContext.h">
-      <Filter>Engine\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicsEngine.h">
-      <Filter>Engine\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="SwapChain.h">
-      <Filter>Engine\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="VertexBuffer.h">
-      <Filter>Engine\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Window.h">
-      <Filter>Engine\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="PixelShader.h">
-      <Filter>Engine\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="ConstantBuffer.h">
-      <Filter>Engine\Header</Filter>
     </ClInclude>
     <ClInclude Include="Vector3.h">
       <Filter>Math</Filter>
@@ -89,25 +77,52 @@
     <ClInclude Include="Matrix.h">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="IndexBuffer.h">
-      <Filter>Engine\Header</Filter>
-    </ClInclude>
     <ClInclude Include="Vector2.h">
       <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="Vector4.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="VertexBuffer.h">
+      <Filter>Engine\Buffer managers</Filter>
+    </ClInclude>
+    <ClInclude Include="IndexBuffer.h">
+      <Filter>Engine\Buffer managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstantBuffer.h">
+      <Filter>Engine\Buffer managers</Filter>
+    </ClInclude>
+    <ClInclude Include="PixelShader.h">
+      <Filter>Engine\Shader managers</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexShader.h">
+      <Filter>Engine\Shader managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Engine\Main parts</Filter>
+    </ClInclude>
+    <ClInclude Include="SwapChain.h">
+      <Filter>Engine\Main parts</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine.h">
+      <Filter>Engine\Main parts</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceContext.h">
+      <Filter>Engine\Main parts</Filter>
+    </ClInclude>
     <ClInclude Include="Resource.h">
-      <Filter>Engine\Header</Filter>
+      <Filter>Engine\Resource managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Engine\Resource managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="VertexShader.hlsl">
-      <Filter>Engine</Filter>
-    </FxCompile>
     <FxCompile Include="PixelShader.hlsl">
-      <Filter>Engine</Filter>
+      <Filter>Engine\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="VertexShader.hlsl">
+      <Filter>Engine\Shaders</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

@@ -8,6 +8,7 @@ class IndexBuffer;
 class ConstantBuffer;
 class VertexShader;
 class PixelShader;
+class Texture;
 
 class GraphicsEngine
 {
@@ -52,4 +53,5 @@ private:
 	friend class ConstantBuffer;
 	friend class VertexShader;
 	friend class PixelShader;
+	friend class Texture;
 };

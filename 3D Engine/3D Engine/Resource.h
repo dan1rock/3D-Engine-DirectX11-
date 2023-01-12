@@ -1,8 +1,12 @@
 #pragma once
+#include <string>
 
 class Resource
 {
-	Resource();
-	~Resource();
+public:
+	Resource(const wchar_t* fullPath);
+	virtual ~Resource();
+protected:
+	std::wstring mFullPath;
 };
 

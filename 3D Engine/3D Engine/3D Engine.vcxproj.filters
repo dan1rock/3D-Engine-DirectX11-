@@ -66,6 +66,12 @@
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Engine\Resource managers</Filter>
     </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Engine\Resource managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Engine\Resource managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -115,6 +121,15 @@
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
       <Filter>Engine\Resource managers</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Engine\Resource managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Engine\Resource managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Pointers.h">
+      <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

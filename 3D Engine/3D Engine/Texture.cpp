@@ -2,7 +2,7 @@
 #include "GraphicsEngine.h"
 #include <DirectXTex.h>
 
-Texture::Texture(const wchar_t* fullPath): Resource(fullPath)
+Texture::Texture(const wchar_t* fullPath): mFullPath(fullPath)
 {
 	DirectX::ScratchImage imageData;
 	HRESULT res = DirectX::LoadFromWICFile(fullPath, DirectX::WIC_FLAGS_NONE, nullptr, imageData);

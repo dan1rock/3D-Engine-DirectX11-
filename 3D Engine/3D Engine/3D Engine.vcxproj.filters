@@ -60,13 +60,7 @@
     <ClCompile Include="SwapChain.cpp">
       <Filter>Engine\Main parts</Filter>
     </ClCompile>
-    <ClCompile Include="Resource.cpp">
-      <Filter>Engine\Resource managers</Filter>
-    </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
-      <Filter>Engine\Resource managers</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureManager.cpp">
       <Filter>Engine\Resource managers</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
@@ -116,20 +110,11 @@
     <ClInclude Include="DeviceContext.h">
       <Filter>Engine\Main parts</Filter>
     </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>Engine\Resource managers</Filter>
-    </ClInclude>
     <ClInclude Include="ResourceManager.h">
-      <Filter>Engine\Resource managers</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureManager.h">
       <Filter>Engine\Resource managers</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>Engine\Resource managers</Filter>
-    </ClInclude>
-    <ClInclude Include="Pointers.h">
-      <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

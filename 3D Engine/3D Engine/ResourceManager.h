@@ -2,18 +2,16 @@
 #include <unordered_map>
 #include <string>
 #include <filesystem>
-#include "Resource.h"
-#include "Pointers.h"
+#include "Texture.h"
 
 class ResourceManager
 {
 public:
 	ResourceManager();
-	ResourcePtr* createResourceFromFile(const wchar_t* path);
+	Texture* createResourceFromFile(const wchar_t* path);
 	~ResourceManager();
-protected:
-	virtual Resource* createResourceFromFileConcrete(const wchar_t* filePath) = 0;
+	Texture* createResourceFromFileConcrete(const wchar_t* filePath);
 private:
-	std::unordered_map<std::wstring, ResourcePtr*> resourceMap;
+	std::unordered_map<std::wstring, Texture*> resourceMap;
 };
 

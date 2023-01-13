@@ -8,7 +8,7 @@ ResourceManager::ResourceManager()
 {
 }
 
-ResourcePtr* ResourceManager::createResourceFromFile(const wchar_t* path)
+Texture* ResourceManager::createResourceFromFile(const wchar_t* path)
 {
 	std::wstring fullPath = std::experimental::filesystem::absolute(path);
 
@@ -17,11 +17,11 @@ ResourcePtr* ResourceManager::createResourceFromFile(const wchar_t* path)
 	if (it != resourceMap.end())
 		return it->second;
 
-	Resource* rawRes = this->createResourceFromFileConcrete(fullPath.c_str());
+	Texture* rawRes = this->createResourceFromFileConcrete(fullPath.c_str());
 
 	if (rawRes)
 	{
-		ResourcePtr* res(rawRes);
+		Texture* res(rawRes);
 		resourceMap[fullPath] = res;
 		return res;
 	}
@@ -31,4 +31,9 @@ ResourcePtr* ResourceManager::createResourceFromFile(const wchar_t* path)
 
 ResourceManager::~ResourceManager()
 {
+}
+
+Texture* ResourceManager::createResourceFromFileConcrete(const wchar_t* filePath)
+{
+	return nullptr;
 }

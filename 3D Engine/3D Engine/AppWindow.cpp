@@ -280,6 +280,8 @@ void AppWindow::onCreate()
 
 	constant data = {};
 	mConstantBuffer->load(&data, sizeof(data));
+
+	GraphicsEngine::engine()->getImmDeviceContext()->setRasterizer();
 }
 
 void AppWindow::onUpdate()

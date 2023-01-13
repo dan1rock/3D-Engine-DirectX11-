@@ -14,6 +14,7 @@ class DeviceContext
 public:
 	DeviceContext(ID3D11DeviceContext* deviceContext);
 	void clearRenderTarget(SwapChain* swapChain, float r, float g, float b, float a);
+	bool setRasterizer();
 	void setVertexBuffer(VertexBuffer* vertexBuffer);
 	void setIndexBuffer(IndexBuffer* indexBuffer);
 	void drawTriangleList(UINT vertexCount, UINT startIndex);
@@ -28,6 +29,7 @@ public:
 	~DeviceContext();
 private:
 	ID3D11DeviceContext* mDeviceContext;
+	ID3D11RasterizerState* mRasterizer = nullptr;
 
 	friend class ConstantBuffer;
 };

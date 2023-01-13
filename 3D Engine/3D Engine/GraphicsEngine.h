@@ -48,6 +48,7 @@ private:
 	ID3D11PixelShader* mPS = nullptr;
 
 	friend class SwapChain;
+	friend class DeviceContext;
 	friend class VertexBuffer;
 	friend class IndexBuffer;
 	friend class ConstantBuffer;

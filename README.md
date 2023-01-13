@@ -3,8 +3,8 @@
 ## Screenshots
 
 <p float="left">
-  <img src="https://raw.githubusercontent.com/dan1rock/3D-Engine-DirectX11-/main/Images/3.png"/>
-  <img src="https://raw.githubusercontent.com/dan1rock/3D-Engine-DirectX11-/main/Images/4.png"/> 
+  <img src="https://raw.githubusercontent.com/dan1rock/3D-Engine-DirectX11-/main/Images/3.png" width="100" />
+  <img src="https://raw.githubusercontent.com/dan1rock/3D-Engine-DirectX11-/main/Images/4.png" width="100" /> 
 </p>
 
 | ![1](https://raw.githubusercontent.com/dan1rock/3D-Engine-DirectX11-/main/Images/3.png) | ![2](https://raw.githubusercontent.com/dan1rock/3D-Engine-DirectX11-/main/Images/4.png) |

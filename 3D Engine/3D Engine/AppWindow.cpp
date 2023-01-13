@@ -157,6 +157,7 @@ void AppWindow::onCreate()
 
 	worldCam.setTranslation(Vector3(0, 0, -2));
 
+	/*
 	vertex vertexList[] = {
 		{Vector3(-0.5f, -0.5f, -0.5f)	,	Vector3(1, 1, 0)},// 0
 		{Vector3(-0.5f, 0.5f, -0.5f)	,	Vector3(1, 0, 1)},// 1
@@ -168,6 +169,7 @@ void AppWindow::onCreate()
 		{Vector3(-0.5f, 0.5f, 0.5f)		,	Vector3(1, 1, 1)},// 6
 		{Vector3(-0.5f, -0.5f, 0.5f)	,	Vector3(0.5f, 0.5f, 1)} // 7
 	};
+	*/
 
 	/*
 	vertex vertexList[] = {
@@ -221,7 +223,7 @@ void AppWindow::onCreate()
 	};
 	*/
 
-	/*
+	
 	vertex vertexList[] = {
 		{Vector3(-0.5f, 0.5f, -0.5f)	,	Vector3(1, 1, 0)},// 1
 		{Vector3(-0.5f, -0.5f, -0.5f)	,	Vector3(1, 1, 0)},// 0
@@ -239,7 +241,7 @@ void AppWindow::onCreate()
 		{Vector3(-0.5f, 0.5f, -0.5f)	,	Vector3(0.8f, 0.8f, 0)},// 1
 		{Vector3(0.0f, 0.0f, 0.5f)		,	Vector3(0.8f, 0.8f, 0)},// 3
 	};
-	*/
+	
 
 	unsigned int indexList[] = {
 		0,1,2,
@@ -286,7 +288,7 @@ void AppWindow::onCreate()
 
 void AppWindow::onUpdate()
 {
-	GraphicsEngine::engine()->getImmDeviceContext()->clearRenderTarget(mSwapChain, 0.3f, 0.3f, 0.6f, 1);
+	GraphicsEngine::engine()->getImmDeviceContext()->clearRenderTarget(mSwapChain, 0.1f, 0.1f, 0.1f, 1);
 	RECT windowSize = this->getClientWindowRect();
 	GraphicsEngine::engine()->getImmDeviceContext()->setViewportSize(windowSize.right - windowSize.left, windowSize.bottom - windowSize.top);
 
@@ -301,9 +303,9 @@ void AppWindow::onUpdate()
 	GraphicsEngine::engine()->getImmDeviceContext()->setPixelShader(mPixelShader);
 	GraphicsEngine::engine()->getImmDeviceContext()->setVertexBuffer(mVertexBuffer);
 	GraphicsEngine::engine()->getImmDeviceContext()->setIndexBuffer(mIndexBuffer);
-	GraphicsEngine::engine()->getImmDeviceContext()->drawIndexedTriangleList(mIndexBuffer->getVertexListSize(), 0, 0);
+	//GraphicsEngine::engine()->getImmDeviceContext()->drawIndexedTriangleList(mIndexBuffer->getVertexListSize(), 0, 0);
 	//GraphicsEngine::engine()->getImmDeviceContext()->drawTriangleStrip(mVertexBuffer->getVertexListSize(), 0);
-	//GraphicsEngine::engine()->getImmDeviceContext()->drawTriangleList(mVertexBuffer->getVertexListSize(), 0);
+	GraphicsEngine::engine()->getImmDeviceContext()->drawTriangleList(mVertexBuffer->getVertexListSize(), 0);
 	mSwapChain->present(false);
 }
 

@@ -42,3 +42,8 @@
 
 ## Class diagram
 
+![1](https://raw.githubusercontent.com/dan1rock/3D-Engine-DirectX11-/main/Images/Class_Diagram.png)
+
+## Include hierarchy
+
+![1](https://raw.githubusercontent.com/dan1rock/3D-Engine-DirectX11-/main/Images/Include_Hierarchy.png)

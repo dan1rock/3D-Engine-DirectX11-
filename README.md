@@ -5,9 +5,6 @@
 <p float="center">
   <img src="https://raw.githubusercontent.com/dan1rock/3D-Engine-DirectX11-/main/Images/3.png" width="49%" />
   <img src="https://raw.githubusercontent.com/dan1rock/3D-Engine-DirectX11-/main/Images/4.png" width="49%" /> 
-</p>
-
-<p float="center">
   <img src="https://raw.githubusercontent.com/dan1rock/3D-Engine-DirectX11-/main/Images/1.png" width="49%" />
   <img src="https://raw.githubusercontent.com/dan1rock/3D-Engine-DirectX11-/main/Images/2.png" width="49%" /> 
 </p>

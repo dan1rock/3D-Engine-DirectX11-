@@ -14,7 +14,7 @@ class DeviceContext
 public:
 	DeviceContext(ID3D11DeviceContext* deviceContext);
 	void clearRenderTarget(SwapChain* swapChain, float r, float g, float b, float a);
-	bool setRasterizer();
+	void setRasterizer(ID3D11RasterizerState* rasterState);
 	void setVertexBuffer(VertexBuffer* vertexBuffer);
 	void setIndexBuffer(IndexBuffer* indexBuffer);
 	void drawTriangleList(UINT vertexCount, UINT startIndex);

@@ -32,6 +32,8 @@ public:
 	void releaseVertexShader();
 	bool compilePixelShader(const wchar_t* fileName, const char* entryPoint, void** shaderBytecode, SIZE_T* bytecodeLength);
 	void releasePixelShader();
+
+	ID3D11RasterizerState* createRasterizer();
 private:
 	ID3D11Device* mD3dDevice = nullptr;
 	D3D_FEATURE_LEVEL mFeatureLevel = {};

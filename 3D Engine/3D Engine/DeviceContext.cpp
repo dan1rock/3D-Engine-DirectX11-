@@ -18,21 +18,9 @@ void DeviceContext::clearRenderTarget(SwapChain* swapChain, float r, float g, fl
 	mDeviceContext->OMSetRenderTargets(1, &swapChain->mRenderTargetView, NULL);
 }
 
-bool DeviceContext::setRasterizer()
+void DeviceContext::setRasterizer(ID3D11RasterizerState* rasterState)
 {
-	CD3D11_RASTERIZER_DESC rastDesc(D3D11_FILL_SOLID, D3D11_CULL_FRONT, FALSE,
-		D3D11_DEFAULT_DEPTH_BIAS, D3D11_DEFAULT_DEPTH_BIAS_CLAMP,
-		D3D11_DEFAULT_SLOPE_SCALED_DEPTH_BIAS, TRUE, FALSE, FALSE, TRUE);
-
-	ID3D11RasterizerState* mRaster;
-	HRESULT hr = GraphicsEngine::engine()->mD3dDevice->CreateRasterizerState(&rastDesc, &mRaster);
-
-	if (FAILED(hr))
-		return false;
-
-	mDeviceContext->RSSetState(mRaster);
-
-	return true;
+	mDeviceContext->RSSetState(rasterState);
 }
 
 void DeviceContext::setVertexBuffer(VertexBuffer* vertexBuffer)

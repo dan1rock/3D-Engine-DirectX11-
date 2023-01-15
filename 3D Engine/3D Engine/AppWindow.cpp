@@ -283,7 +283,8 @@ void AppWindow::onCreate()
 	constant data = {};
 	mConstantBuffer->load(&data, sizeof(data));
 
-	GraphicsEngine::engine()->getImmDeviceContext()->setRasterizer();
+	ID3D11RasterizerState* rasterState = GraphicsEngine::engine()->createRasterizer();
+	GraphicsEngine::engine()->getImmDeviceContext()->setRasterizer(rasterState);
 }
 
 void AppWindow::onUpdate()
